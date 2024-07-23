@@ -11,4 +11,12 @@
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>com.mycompany.asmduan1.ASMDuAn1</exec.mainClass>
     </properties>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>12.4.2.jre11</version>
+        </dependency>
+    </dependencies>
 </project>

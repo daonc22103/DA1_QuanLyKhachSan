@@ -45,7 +45,7 @@ public class frm_form extends javax.swing.JFrame {
         mnu_QLDP = new javax.swing.JMenuItem();
         mnu_ThongKe = new javax.swing.JMenuItem();
         mnu_QuanLyNhanVien = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnu_QuanLyThongKH = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnu_DoanhThu = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -167,7 +167,12 @@ public class frm_form extends javax.swing.JFrame {
         jMenu2.add(mnu_QLDP);
 
         mnu_ThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/List.png"))); // NOI18N
-        mnu_ThongKe.setText("Thống kê");
+        mnu_ThongKe.setText("Quản lý thống kê");
+        mnu_ThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_ThongKeActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnu_ThongKe);
 
         mnu_QuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/User.png"))); // NOI18N
@@ -179,9 +184,14 @@ public class frm_form extends javax.swing.JFrame {
         });
         jMenu2.add(mnu_QuanLyNhanVien);
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Users.png"))); // NOI18N
-        jMenuItem1.setText("Quản lý thông tin khách hàng");
-        jMenu2.add(jMenuItem1);
+        mnu_QuanLyThongKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Users.png"))); // NOI18N
+        mnu_QuanLyThongKH.setText("Quản lý thông tin khách hàng");
+        mnu_QuanLyThongKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_QuanLyThongKHActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnu_QuanLyThongKH);
 
         jMenuBar1.add(jMenu2);
 
@@ -305,6 +315,17 @@ public class frm_form extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnu_QuanLyNhanVienActionPerformed
 
+    private void mnu_ThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_ThongKeActionPerformed
+        QuanLiThongKe qltk = new QuanLiThongKe();
+        qltk.show();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnu_ThongKeActionPerformed
+
+    private void mnu_QuanLyThongKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_QuanLyThongKHActionPerformed
+           
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnu_QuanLyThongKHActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -354,12 +375,12 @@ public class frm_form extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_DongHo;
     private javax.swing.JMenuItem mnu_DoanhThu;
     private javax.swing.JMenuItem mnu_QLDP;
     private javax.swing.JMenuItem mnu_QuanLyNhanVien;
+    private javax.swing.JMenuItem mnu_QuanLyThongKH;
     private javax.swing.JMenuItem mnu_ThongKe;
     private javax.swing.JMenuItem mnui_DangXuat;
     private javax.swing.JMenuItem mnui_QLPhong;
