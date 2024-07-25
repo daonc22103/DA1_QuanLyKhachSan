@@ -177,7 +177,7 @@ public class frmDangNhapND extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập tài khoản của bạn!");
         } else if (matkhau.isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "mật khẩu không thể để trống!");
-        } else if (taikhoan.equalsIgnoreCase("NguyenChiDao") && (matkhau.equals("22102003"))) {
+        } else if (taikhoan.equalsIgnoreCase("nv123") && (matkhau.equals("123456"))) {
             JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
             QuanLyDatPhong ql = new QuanLyDatPhong();
             ql.show();

@@ -129,7 +129,7 @@ public class frm_DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập tài khoản của bạn!");
         } else if (matkhau.isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "mật khẩu không thể để trống!");
-        } else if (taikhoan.equalsIgnoreCase("NguyenChiDao") && (matkhau.equals("22102003"))) {
+        } else if (taikhoan.equalsIgnoreCase("ql123") && (matkhau.equals("123456"))) {
             JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
             frm_form ql = new frm_form();
             ql.show();
