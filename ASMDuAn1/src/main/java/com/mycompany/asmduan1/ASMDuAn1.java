@@ -11,6 +11,7 @@ package com.mycompany.asmduan1;
 public class ASMDuAn1 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        frmDangNhapND dangNhapND = new frmDangNhapND();
+        dangNhapND.setVisible(true);
     }
 }
