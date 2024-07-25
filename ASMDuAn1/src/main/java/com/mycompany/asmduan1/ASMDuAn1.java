@@ -13,6 +13,8 @@ public class ASMDuAn1 {
     public static void main(String[] args) {
         frmDangNhapND dangnhap = new frmDangNhapND();
         dangnhap.setVisible(true);
-        
     }
 }
+
+
+
