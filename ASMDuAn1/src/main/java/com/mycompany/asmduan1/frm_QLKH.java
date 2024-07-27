@@ -23,13 +23,17 @@ public class frm_QLKH extends javax.swing.JFrame {
     private QLKhachHang qlkh = new QLKhachHang();
     private ArrayList<Khachhang> arrKH = new ArrayList<>();
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private Khachhang khachhang;
 
     /**
      * Creates new form QuanLyThongTinKhachHang
      */
     public frm_QLKH() {
         initComponents();
-        this.updateTable();
+        init();
+    }
+    public void init(){
+        fillTableQLKhachHang();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -190,6 +194,12 @@ public class frm_QLKH extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Tìm Kiếm");
 
+        txt_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TimKiemActionPerformed(evt);
+            }
+        });
+
         btn_Them.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_Them.setText("Thêm");
         btn_Them.addActionListener(new java.awt.event.ActionListener() {
@@ -225,9 +235,28 @@ public class frm_QLKH extends javax.swing.JFrame {
                 "Mã Khách Hàng", "Họ Tên", "Giới Tính", "Ngày Sinh", "CMND/CCCD", "Địa Chỉ", "SĐT", "Email"
             }
         ));
+        tbl_QLKhachHang.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                tbl_QLKhachHangAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        tbl_QLKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_QLKhachHangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_QLKhachHang);
 
         btn_Tim.setText("Tìm");
+        btn_Tim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel11.setText("THÔNG TIN KHÁCH HÀNG");
@@ -301,15 +330,15 @@ public class frm_QLKH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
-        // TODO add your handling code here:
+        suaTTKH();
     }//GEN-LAST:event_btn_SuaActionPerformed
 
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
-        // TODO add your handling code here:
+        xoaTTKH();
     }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void btn_Xoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xoa1ActionPerformed
-        // TODO add your handling code here:
+        hide();
     }//GEN-LAST:event_btn_Xoa1ActionPerformed
 
     private void txt_MaKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_MaKhachHangActionPerformed
@@ -317,24 +346,44 @@ public class frm_QLKH extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_MaKhachHangActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-        Khachhang khachhang = this.readForm();
-    if (khachhang != null) {
-        // Thêm dữ liệu vào cơ sở dữ liệu
-        qlkh.addKkhachhang(khachhang); // Sửa tên phương thức thành addKhachhang
-        
-        // Hiển thị thông báo thành công
-        JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
-        
-        // Cập nhật lại bảng
-        this.updateTable();
-        
-        // Xóa dữ liệu trong form sau khi thêm thành công
-        this.clear();
-    } else {
-        // Hiển thị thông báo lỗi nếu dữ liệu nhập vào không hợp lệ
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin và kiểm tra lại");
-    }
+        themTTKH();
     }//GEN-LAST:event_btn_ThemActionPerformed
+
+    private void tbl_QLKhachHangAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tbl_QLKhachHangAncestorAdded
+
+    }//GEN-LAST:event_tbl_QLKhachHangAncestorAdded
+
+    private void tbl_QLKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_QLKhachHangMouseClicked
+        int index = tbl_QLKhachHang.getSelectedRow();
+        if (index >= 0 && index < arrKH.size()) {
+            Khachhang selectedKhachhang = arrKH.get(index);
+            fillFromTableQLKH(selectedKhachhang);
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng nào.");    
+        };
+    }//GEN-LAST:event_tbl_QLKhachHangMouseClicked
+
+    private void txt_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TimKiemActionPerformed
+
+    private void btn_TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimActionPerformed
+        String maKhachHang = txt_TimKiem.getText().trim();
+    if (maKhachHang.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng để tìm kiếm.");
+        return;
+    }
+    // Tìm kiếm khách hàng theo mã
+    Khachhang khachhang = qlkh.getKhachHangByMaKH(maKhachHang);
+    if (khachhang != null) {
+        // Hiển thị thông tin khách hàng trong form
+        fillFromTableQLKH(khachhang);
+    } else {
+        JOptionPane.showMessageDialog(this, "Khách hàng không tồn tại.");
+        // Xóa thông tin hiện tại trên form
+        lamMoiFromQLKhachHang();
+    }
+    }//GEN-LAST:event_btn_TimActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,98 +454,157 @@ public class frm_QLKH extends javax.swing.JFrame {
     private javax.swing.JTextField txt_TimKiem;
     // End of variables declaration//GEN-END:variables
     
-    public void clear() {
-    this.txt_MaKhachHang.setText("");
-    this.txt_TenKhachHang.setText("");
-    this.txt_SDT.setText("");
-    this.rdo_Nam.setSelected(false);
-    this.rdo_Nu.setSelected(false);
-    this.txt_Email.setText("");
-    this.txt_NgaySinh.setText("");
-    this.txt_CCCD.setText("");
-    this.txt_DiaChi.setText("");
-}
-    public void updateTable() {
-    ArrayList<Khachhang> arrKH = qlkh.getAllKhachHang(); // Sử dụng phương thức getAllKhachHang
-    String[] header = {"Mã khách hàng", "Họ tên", "Giới tính", "Ngày Sinh", "CMND/CCCD", "Địa chỉ", "SĐT", "Email"};
-    DefaultTableModel model = new DefaultTableModel(header, 0);
-
-    for (Khachhang khachhang : arrKH) {
-        // Sử dụng phương thức toObjectArray để lấy dữ liệu cho hàng
-        Object[] rowData = khachhang.toObjectArray();
-        // Định dạng ngày và giới tính
-        rowData[3] = new SimpleDateFormat("MM/dd/yyyy").format(rowData[3]);
-        rowData[2] = ((boolean) rowData[2]) ? "Nam" : "Nữ";
-        model.addRow(rowData);
+    public void fillTableQLKhachHang() {
+        arrKH= qlkh.getAllKhachHang();
+        defaultTableModel = (DefaultTableModel) tbl_QLKhachHang.getModel();
+        defaultTableModel.setRowCount(0);
+        for (Khachhang list : arrKH) {
+            defaultTableModel.addRow(list.toObjectQLKH());
+        }
     }
+        public void lamMoiFromQLKhachHang() {
+        txt_MaKhachHang.setText("");
+        txt_TenKhachHang.setText("");
+        rdo_Nam.setSelected(false);
+        rdo_Nu.setSelected(false);
+        txt_NgaySinh.setText("");
+        txt_CCCD.setText("");
+        txt_DiaChi.setText("");
+        txt_SDT.setText("");
+        txt_Email.setText("");
+    }
+        public boolean checkValueFromTTKH() {
+            // Kiểm tra các trường khác
+            if (txt_MaKhachHang.getText().trim().isEmpty() || 
+                txt_TenKhachHang.getText().trim().isEmpty() || 
+                txt_NgaySinh.getText().trim().isEmpty() ||
+                txt_CCCD.getText().trim().isEmpty() || 
+                txt_DiaChi.getText().trim().isEmpty() || 
+                txt_SDT.getText().trim().isEmpty() || 
+                txt_Email.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin.");
+                return false;
+            }
 
-    this.tbl_QLKhachHang.setModel(model);
+            if (!rdo_Nam.isSelected() && !rdo_Nu.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Chưa chọn giới tính.");
+                return false;
+            }
+
+            // Kiểm tra số điện thoại
+            String pSDT = "^(0|\\+84)[1-9][0-9]{8,10}$";
+            if (!txt_SDT.getText().matches(pSDT)) {
+                JOptionPane.showMessageDialog(this, "Nhập không đúng định dạng số điện thoại.");
+                return false;
+            }
+
+            // Kiểm tra email
+            String pEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+            if (!txt_Email.getText().matches(pEmail)) {
+                JOptionPane.showMessageDialog(this, "Nhập không đúng định dạng email.");
+                return false;
+            }
+
+            // Kiểm tra số CCCD
+            String pCCCD = "^\\d{12}$"; // CCCD có 12 ký tự số
+            if (!txt_CCCD.getText().matches(pCCCD)) {
+                JOptionPane.showMessageDialog(this, "Số CCCD không hợp lệ. Phải có 12 ký tự số.");
+                return false;
+            }
+
+            return true;
 }
-    public Khachhang readForm() {
-    Khachhang khachhang = new Khachhang();
-    try {
-        String maKH = this.txt_MaKhachHang.getText();
-        String tenKH = this.txt_TenKhachHang.getText();
-        boolean gioiTinh = rdo_Nam.isSelected();
-        String ngaySinh = this.txt_NgaySinh.getText();
-        String CCCD = this.txt_CCCD.getText();
-        String diaChi = this.txt_DiaChi.getText();
-        String SDT = this.txt_SDT.getText();
-        String Email = this.txt_Email.getText();
 
-        if (maKH.isEmpty() || tenKH.isEmpty() || ngaySinh.isEmpty() || CCCD.isEmpty() || diaChi.isEmpty() || SDT.isEmpty() || Email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ thông tin");
-            return null;
+    public Khachhang readFromTTKH() {
+        Khachhang khachhang = new Khachhang();
+        int gioiTinh = 0;
+        if (rdo_Nam.isSelected()) {
+            gioiTinh = 1;
         }
-
-        if (maKH.length() < 3) {
-            JOptionPane.showMessageDialog(this, "Mã khách hàng phải ít nhất 3 ký tự");
-            return null;
-        }
-
-        if (SDT.length() != 10) {
-            JOptionPane.showMessageDialog(this, "Số điện thoại phải có 10 chữ số");
-            return null;
-        }
+        String maKH, tenKH, ngaySinh, CCCD, diaChi, SDT, Email;
+        maKH = txt_MaKhachHang.getText();
+        tenKH = txt_TenKhachHang.getText();
+        ngaySinh = txt_NgaySinh.getText();
+        CCCD = txt_CCCD.getText();
+        diaChi = txt_DiaChi.getText();
+        SDT =  txt_SDT.getText();
+        Email = txt_Email.getText();
 
         khachhang.setMaKH(maKH);
         khachhang.setTenKH(tenKH);
         khachhang.setGioiTinh(gioiTinh);
-
-        // Ensure the date is parsed correctly
-        try {
-            khachhang.setNgaySinh(XDate.toDate(ngaySinh, "MM/dd/yyyy"));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh không đúng định dạng MM/dd/yyyy");
-            return null;
-        }
-
+        khachhang.setNgaySinh(ngaySinh);
         khachhang.setCCCD(CCCD);
         khachhang.setDiaChi(diaChi);
         khachhang.setSDT(SDT);
         khachhang.setEmail(Email);
 
+
         return khachhang;
-    } catch (Exception e) {
-        // Log and display a generic error message
-        System.err.println("Error reading form data: " + e.getMessage());
-        JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi đọc thông tin. Vui lòng kiểm tra lại.");
     }
-    return null;
-}
-    private void fillForm(int index){
-            Khachhang khachhang = this.arrKH.get(index);
-            this.txt_MaKhachHang.setText(khachhang.getMaKH());
-            this.txt_TenKhachHang.setText(khachhang.getTenKH());
-            boolean isMale = khachhang.getGioiTinh();
-            this.rdo_Nam.setSelected(isMale);
-            this.rdo_Nu.setSelected(!isMale);
-            Date ngaySinh = khachhang.getNgaySinh();
-            String formattedDate = new SimpleDateFormat("MM/dd/yyyy").format(ngaySinh);
-            this.txt_NgaySinh.setText(formattedDate);
-            this.txt_CCCD.setText(khachhang.getCCCD());
-            this.txt_DiaChi.setText(khachhang.getDiaChi());
-            this.txt_SDT.setText(khachhang.getSDT());
-            this.txt_Email.setText(khachhang.getEmail());
+    public void fillFromTableQLKH(Khachhang khachhang) {
+        txt_MaKhachHang.setText(khachhang.getMaKH());
+        txt_TenKhachHang.setText(khachhang.getTenKH());
+        if (khachhang.getGioiTinh() == 1) {
+            rdo_Nam.setSelected(true);
+        } else {
+            rdo_Nu.setSelected(true);
+        }
+        txt_NgaySinh.setText(khachhang.getNgaySinh());
+        txt_CCCD.setText(khachhang.getCCCD());
+        txt_DiaChi.setText(khachhang.getDiaChi());
+        txt_SDT.setText(khachhang.getSDT());
+        txt_Email.setText(khachhang.getEmail());
     }
+        public void themTTKH() {
+        try {
+            if (checkValueFromTTKH()) {
+                Khachhang khachhang = readFromTTKH();
+                qlkh.addKkhachhang(khachhang);
+                JOptionPane.showMessageDialog(this, "Thêm dữ liệu thành công");
+                fillTableQLKhachHang();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm dữ liệu thất bại. Kiểm tra lại giá trị đầu vào.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+        public void suaTTKH() {
+        try {
+            if (checkValueFromTTKH()) {
+                Khachhang khachhang = readFromTTKH();
+                qlkh.updateKhachhang(khachhang);
+                JOptionPane.showMessageDialog(this, "Cập nhật dữ liệu thành công");
+                fillTableQLKhachHang();
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật dữ liệu thất bại. Kiểm tra lại giá trị đầu vào.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+        public void xoaTTKH() {
+            try {
+                String maKhachHang = txt_MaKhachHang.getText().trim();
+                if (!maKhachHang.isEmpty()) {
+                    Khachhang khachhang = new Khachhang();
+                    khachhang.setMaKH(maKhachHang);
+
+                    int result = qlkh.DeleteKhachHang(khachhang);
+                    if (result > 0) {
+                        JOptionPane.showMessageDialog(this, "Xóa dữ liệu thành công");
+                        fillTableQLKhachHang();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng với Mã đã cho");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Mã khách hàng không được để trống");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Mã khách hàng phải là số hợp lệ", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Lỗi khi xóa dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 }

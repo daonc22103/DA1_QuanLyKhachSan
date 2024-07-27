@@ -14,13 +14,24 @@ import java.util.Date;
 public class Khachhang {
     private String maKH;
     private String tenKH;
-    private String SDT;
-    private String diaChi;
-    private String Email;
+    private int gioiTinh;
+    private String ngaySinh;
     private String CCCD;
-    private Date ngaySinh =XDate.addDays(new Date(), -365*20);
-    private boolean gioiTinh;
-    
+    private String diaChi;
+    private String SDT;
+    private String Email;
+
+    public Khachhang() {
+    }
+    public Khachhang(String maKH, String tenKH, int gioiTinh, String CCCD, String diaChi, String SDT, String Email) {
+        this.maKH = maKH;
+        this.tenKH = tenKH;
+        this.gioiTinh = gioiTinh;
+        this.CCCD = CCCD;
+        this.diaChi = diaChi;
+        this.SDT = SDT;
+        this.Email = Email;
+    }
 
     public String getMaKH() {
         return maKH;
@@ -38,12 +49,28 @@ public class Khachhang {
         this.tenKH = tenKH;
     }
 
-    public String getSDT() {
-        return SDT;
+    public int getGioiTinh() {
+        return gioiTinh;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public void setGioiTinh(int gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public String getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getCCCD() {
+        return CCCD;
+    }
+
+    public void setCCCD(String CCCD) {
+        this.CCCD = CCCD;
     }
 
     public String getDiaChi() {
@@ -54,6 +81,14 @@ public class Khachhang {
         this.diaChi = diaChi;
     }
 
+    public String getSDT() {
+        return SDT;
+    }
+
+    public void setSDT(String SDT) {
+        this.SDT = SDT;
+    }
+
     public String getEmail() {
         return Email;
     }
@@ -62,40 +97,9 @@ public class Khachhang {
         this.Email = Email;
     }
 
-    public Date getNgaySinh() {
-        return ngaySinh;
-    }
-
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public boolean getGioiTinh() {
-        return gioiTinh;
-    }
-
-    public void setGioiTinh(boolean gioiTinh) {
-        this.gioiTinh = gioiTinh;
-    }
-        
-    public String getCCCD() {
-        return CCCD;
-    }
-
-    public void setCCCD(String CCCD) {
-        this.CCCD = CCCD;
-    }
-        public Object[] toObjectArray(){
+    public Object[] toObjectQLKH(){
         return new Object[] {
-            this.getMaKH(),
-            this.getTenKH(),
-            this.getGioiTinh(),
-            this.getNgaySinh(),
-            this.getCCCD(),
-            this.getDiaChi(),
-            this.getSDT(),
-            this.getEmail()
+        maKH, tenKH, gioiTinh == 1 ? "Nam" : "Nữ", ngaySinh, CCCD, diaChi, SDT, Email      
         };
     }
-    
 }

@@ -6,6 +6,7 @@ package com.QLKhachSan.dao;
  */
 //package com.QLKhachSan.dao;
 import com.QLKhachSan.entity.Khachhang;
+import com.QLKhachSan.utils.XDate;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -29,12 +30,11 @@ public class QLKhachHang {
             ResultSet res = state.executeQuery(sql);
 
             while (res.next()) {
-                Date ngaySinh = null;
                 Khachhang khachhang = new Khachhang();
                 khachhang.setMaKH(res.getString("maKH"));
                 khachhang.setTenKH(res.getString("tenKH"));
-                khachhang.setGioiTinh(res.getBoolean("gioiTinh"));
-                khachhang.setNgaySinh(res.getDate("ngaySinh"));
+                khachhang.setGioiTinh(res.getInt("gioiTinh"));
+                khachhang.setNgaySinh(res.getString("ngaySinh"));
                 khachhang.setCCCD(res.getString("CCCD"));
                 khachhang.setDiaChi(res.getString("diaChi"));
                 khachhang.setSDT(res.getString("SDT"));
@@ -48,19 +48,18 @@ public class QLKhachHang {
         return khachHangArr;
     }
     public static int addKkhachhang(Khachhang khachhang) {
-        String sql = "INSERT INTO KHACHHANG(MaKH, TenKH, GioiTinh, SDT, DiaChi, Email, NgaySinh, CCCD) VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO KHACHHANG(MaKH, TenKH, GioiTinh, NgaySinh, CCCD, DiaChi, SDT, Email) VALUES(?,?,?,?,?,?,?,?)";
         try {
             Connection connection = XJdbc.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, khachhang.getMaKH());
             preparedStatement.setString(2, khachhang.getTenKH());
-            preparedStatement.setBoolean(3, khachhang.getGioiTinh());
-            preparedStatement.setString(3, khachhang.getSDT());
-            preparedStatement.setString(4, khachhang.getDiaChi());
-            preparedStatement.setString(5, khachhang.getEmail());
-            preparedStatement.setDate(6, new java.sql.Date(khachhang.getNgaySinh().getTime()));
-
-            preparedStatement.setString(8, khachhang.getCCCD());
+            preparedStatement.setInt(3, khachhang.getGioiTinh());
+            preparedStatement.setString(4,khachhang.getNgaySinh());
+            preparedStatement.setString(5, khachhang.getCCCD());
+            preparedStatement.setString(6, khachhang.getDiaChi());
+            preparedStatement.setString(7, khachhang.getSDT());
+            preparedStatement.setString(8, khachhang.getEmail());
             int i = preparedStatement.executeUpdate();
             return i;
         } catch (Exception e) {
@@ -82,53 +81,49 @@ public class QLKhachHang {
         }
     }
         public static int updateKhachhang(Khachhang khachhang) {
-        String sql = "UPDATE KHACHHANG SET TenKH = ?, SDT = ?, DiaChi = ?, Email = ?, NgaySinh = ?, GioiTinh = ?, CCCD = ? WHERE MaKH = ?";
-        try (Connection conn = XJdbc.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-preparedStatement.setString(1, khachhang.getTenKH());
-            preparedStatement.setString(2, khachhang.getSDT());
-            preparedStatement.setString(3, khachhang.getDiaChi());
-            preparedStatement.setString(4, khachhang.getEmail());
-            preparedStatement.setDate(5, new java.sql.Date(khachhang.getNgaySinh().getTime()));
-            preparedStatement.setBoolean(6, khachhang.getGioiTinh());
-            preparedStatement.setString(7, khachhang.getMaKH());
-            preparedStatement.setString(8, khachhang.getCCCD());
+        String sql = "UPDATE KHACHHANG SET TenKH = ?, GioiTinh = ?, NgaySinh = ?, CCCD = ?,DiaChi = ?, SDT = ?, Email = ? WHERE MaKH = ?";
+        try (
+            Connection conn = XJdbc.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, khachhang.getTenKH());
+            preparedStatement.setInt(2, khachhang.getGioiTinh());
+            preparedStatement.setString(3,khachhang.getNgaySinh());
+            preparedStatement.setString(4, khachhang.getCCCD());
+            preparedStatement.setString(5, khachhang.getDiaChi());
+            preparedStatement.setString(6, khachhang.getSDT());
+            preparedStatement.setString(7, khachhang.getEmail());
+            preparedStatement.setString(8, khachhang.getMaKH());
 
-            int count = preparedStatement.executeUpdate();
-            return count;
+            int i = preparedStatement.executeUpdate();
+            return i;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
     }
-public static Khachhang getKhachhangByID(String id) {
-    String sql = "SELECT * FROM KHACHHANG WHERE MaKH = ?";
-    try (
-        Connection conn = XJdbc.getConnection();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        
-        pstmt.setString(1, id);
-        ResultSet res = pstmt.executeQuery();
-
-        if (res.next()) {
-            String maKH = res.getString("MaKH");
-            String tenKH = res.getString("TenKH");
-            String SDT = res.getString("SDT");
-            String diaChi = res.getString("DiaChi");
-            String email = res.getString("Email");
-            Date ngaySinh = res.getDate("NgaySinh");
-            boolean gioiTinh = res.getBoolean("GioiTinh");
-            String CCCD = res.getString("CCCD");
-
-            Khachhang khachhang = new Khachhang();
-            return khachhang;
-        }
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return null;
-}
+        public Khachhang getKhachHangByMaKH(String maKH) {
+                // Giả sử bạn có một phương thức tìm khách hàng trong cơ sở dữ liệu
+                // Ví dụ:
+                String sql = "SELECT * FROM KHACHHANG WHERE MaKH = ?";
+                try {
+                    ResultSet rs = XJdbc.executeQuery(sql, maKH);
+                    if (rs.next()) {
+                        Khachhang khachhang = new Khachhang();
+                        khachhang.setMaKH(rs.getString("maKH"));
+                        khachhang.setTenKH(rs.getString("tenKH"));
+                        khachhang.setGioiTinh(rs.getInt("gioiTinh"));
+                        khachhang.setNgaySinh(rs.getString("ngaySinh"));
+                        khachhang.setCCCD(rs.getString("CCCD"));
+                        khachhang.setDiaChi(rs.getString("diaChi"));
+                        khachhang.setSDT(rs.getString("SDT"));
+                        khachhang.setEmail(rs.getString("Email"));
+                        return khachhang;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
 }
 
 

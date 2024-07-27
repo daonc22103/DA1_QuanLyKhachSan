@@ -34,6 +34,23 @@ public class XJdbc {
         }
         return null;
     }
-
+   public static ResultSet executeQuery(String sql, Object... args) throws ClassNotFoundException {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=QLKHACHSAN;encrypt=true;trustServerCertificate=true";
+            String USERNAME = "sa";
+            String PASSWORD = "123456";
+            
+            Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            for (int i = 0; i < args.length; i++) {
+                pstmt.setObject(i + 1, args[i]);
+            }
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
