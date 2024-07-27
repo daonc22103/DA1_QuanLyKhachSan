@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -142,6 +144,36 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         buttonGroup1.clearSelection();//Xóa lựa chọn
         txt_MaNV.setEditable(true);
         loadTable();
+    }
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    // Phương thức để phân tích ngày từ chuỗi
+    // Hoặc định dạng của bạn
+    
+    
+    public void them() throws SQLException {
+        NhanVien NhanVien = getForm();
+        if (JOptionPane.showConfirmDialog(this,
+                "Bạn có muốn thêm hay không?") == 0) {
+            String SQL = "INSERT INTO NHANVIEN (MaNV, TenNV, ChucVu, CongViec, NamSinh, GioiTinh) VALUES(?,?,?,?,?,?)";
+            PreparedStatement st = con.prepareStatement(SQL);
+            // st.setString(1, sv.maTS);
+            String maNV = NhanVien.maNV.matches("^\\d+$") ? "PC" + NhanVien.maNV : NhanVien.maNV;
+            st.setString(1, maNV);
+            st.setString(2, NhanVien.tenNV);
+            st.setString(3, NhanVien.chucVu);
+            st.setString(4, NhanVien.congViec);
+            st.setDate(5, new java.sql.Date(NhanVien.ngaySinh.getTime())); // Chuyển đổi java.util.Date thành java.sql.Date
+            st.setBoolean(6, NhanVien.gioiTinh);
+            int rs = st.executeUpdate();
+            if (rs > 0) {
+                JOptionPane.showMessageDialog(this, "thêm thành công");
+                lammoi();
+                listsp.clear();
+                loadTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "thêm không thành công");
+            }
+        }
     }
     
     /**
@@ -351,6 +383,11 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbl_Data);
 
         btn_Thêm.setText("Thêm");
+        btn_Thêm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThêmActionPerformed(evt);
+            }
+        });
 
         btn_LamMoi.setText("Làm mới");
         btn_LamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -447,6 +484,15 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
             Logger.getLogger(frm_QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_LamMoiActionPerformed
+
+    private void btn_ThêmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThêmActionPerformed
+        try {
+            them();
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ThêmActionPerformed
 
     /**
      * @param args the command line arguments
