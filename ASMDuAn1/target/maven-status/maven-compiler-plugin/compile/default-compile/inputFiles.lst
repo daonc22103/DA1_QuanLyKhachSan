@@ -4,6 +4,7 @@ D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\QLKhachSan\entity\Nha
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\QLKhachSan\utils\XDate.java
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\mycompany\asmduan1\ASMDuAn1.java
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\mycompany\asmduan1\frm_DangNhap.java
+D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\QLKhachSan\dao\QLKhachHang.java
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\mycompany\asmduan1\QuanLiThongKe.java
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\mycompany\asmduan1\frm_QuanLyNhanVien.java
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\QLKhachSan\entity\Khachhang.java
@@ -11,3 +12,4 @@ D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\mycompany\asmduan1\Qu
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\mycompany\asmduan1\frm_form.java
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\mycompany\asmduan1\QuanLyDatPhong.java
 D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\mycompany\asmduan1\frm_QLKH.java
+D:\File Java\DA1_QuanLyKhachSan\ASMDuAn1\src\main\java\com\QLKhachSan\utils\XJdbc.java

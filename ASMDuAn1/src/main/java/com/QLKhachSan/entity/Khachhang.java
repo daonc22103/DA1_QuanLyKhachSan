@@ -17,17 +17,10 @@ public class Khachhang {
     private String SDT;
     private String diaChi;
     private String Email;
+    private String CCCD;
     private Date ngaySinh =XDate.addDays(new Date(), -365*20);
     private boolean gioiTinh;
-
-    public Khachhang(String maKH, String tenKH, String SDT, String diaChi, String Email, boolean gioiTinh) {
-        this.maKH = maKH;
-        this.tenKH = tenKH;
-        this.SDT = SDT;
-        this.diaChi = diaChi;
-        this.Email = Email;
-        this.gioiTinh = gioiTinh;
-    }
+    
 
     public String getMaKH() {
         return maKH;
@@ -77,13 +70,32 @@ public class Khachhang {
         this.ngaySinh = ngaySinh;
     }
 
-    public boolean isGioiTinh() {
+    public boolean getGioiTinh() {
         return gioiTinh;
     }
 
     public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
-    
+        
+    public String getCCCD() {
+        return CCCD;
+    }
+
+    public void setCCCD(String CCCD) {
+        this.CCCD = CCCD;
+    }
+        public Object[] toObjectArray(){
+        return new Object[] {
+            this.getMaKH(),
+            this.getTenKH(),
+            this.getGioiTinh(),
+            this.getNgaySinh(),
+            this.getCCCD(),
+            this.getDiaChi(),
+            this.getSDT(),
+            this.getEmail()
+        };
+    }
     
 }
