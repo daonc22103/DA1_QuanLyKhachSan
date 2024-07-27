@@ -4,6 +4,11 @@
  */
 package com.mycompany.asmduan1;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author AD
@@ -309,10 +314,11 @@ public class frm_form extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LeTanActionPerformed
 
     private void mnu_QuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_QuanLyNhanVienActionPerformed
-        frm_QuanLyNhanVien qlnv = new frm_QuanLyNhanVien();
-        qlnv.show();
-        
+        frm_QuanLyNhanVien qlnv = null;
+        qlnv = new frm_QuanLyNhanVien(); // Xử lý ngoại lệ ClassNotFoundException
+        // Xử lý ngoại lệ SQLException
         // TODO add your handling code here:
+        qlnv.setVisible(true); // Hiển thị form frm_QuanLyNhanVien
     }//GEN-LAST:event_mnu_QuanLyNhanVienActionPerformed
 
     private void mnu_ThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_ThongKeActionPerformed

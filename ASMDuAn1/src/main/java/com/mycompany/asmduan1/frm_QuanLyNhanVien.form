@@ -112,11 +112,11 @@
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="txt_MaNVa" min="-2" pref="173" max="-2" attributes="0"/>
+                  <Component id="txt_TimMaNV" min="-2" pref="173" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="txt_TenNVa" min="-2" pref="181" max="-2" attributes="0"/>
+                  <Component id="txt_TimTenNV" min="-2" pref="181" max="-2" attributes="0"/>
                   <EmptySpace pref="34" max="32767" attributes="0"/>
                   <Component id="btn_TimKiem" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -129,9 +129,9 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_MaNVa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_TimMaNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_TenNVa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_TimTenNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_TimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
@@ -140,7 +140,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txt_MaNVa">
+        <Component class="javax.swing.JTextField" name="txt_TimMaNV">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -158,7 +158,7 @@
             <Property name="text" type="java.lang.String" value="T&#xea;n nh&#xe2;n vi&#xea;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_TenNVa">
+        <Component class="javax.swing.JTextField" name="txt_TimTenNV">
         </Component>
         <Component class="javax.swing.JButton" name="btn_TimKiem">
           <Properties>
@@ -189,9 +189,9 @@
                   </Group>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txt_MaNVb" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_TenNVb" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txt_SDT" alignment="0" pref="158" max="32767" attributes="0"/>
+                      <Component id="txt_MaNV" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txt_TenNV" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txt_NamSinh" alignment="0" pref="158" max="32767" attributes="0"/>
                       <Component id="cbo_ChucVu" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
@@ -201,16 +201,14 @@
                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txt_Email" pref="160" max="32767" attributes="0"/>
-                          <Component id="txt_QueQuan" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="rdo_Nam" min="-2" pref="51" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="rdo_Nu" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jPasswordField1" alignment="0" pref="160" max="32767" attributes="0"/>
+                      <Component id="txt_CongViec" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -222,20 +220,20 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_MaNVb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_MaNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_Email" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPasswordField1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_TenNVb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_TenNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_QueQuan" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_CongViec" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_SDT" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_NamSinh" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rdo_Nam" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -260,7 +258,7 @@
             <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe2;n vi&#xea;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_MaNVb">
+        <Component class="javax.swing.JTextField" name="txt_MaNV">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -270,16 +268,19 @@
             <Property name="text" type="java.lang.String" value="T&#xea;n nh&#xe2;n vi&#xea;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_TenNVb">
+        <Component class="javax.swing.JTextField" name="txt_TenNV">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_SDT">
+        <Component class="javax.swing.JTextField" name="txt_NamSinh">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_NamSinhActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec7;n tho&#x1ea1;i"/>
+            <Property name="text" type="java.lang.String" value="N&#x103;m sinh"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -295,7 +296,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Qu&#xea; qu&#xe1;n"/>
+            <Property name="text" type="java.lang.String" value="C&#xf4;ng Vi&#x1ec7;c"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
@@ -305,10 +306,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Gi&#x1edb;i t&#xed;nh"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txt_Email">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txt_QueQuan">
         </Component>
         <Component class="javax.swing.JRadioButton" name="rdo_Nam">
           <Properties>
@@ -346,6 +343,13 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_CongViec">
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -358,17 +362,19 @@
         <Component class="javax.swing.JTable" name="tbl_Data">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="4">
-                <Column editable="true" title="M&#xe3; NV" type="java.lang.Object"/>
-                <Column editable="true" title="T&#xea;n NV" type="java.lang.Object"/>
+              <Table columnCount="6" rowCount="4">
+                <Column editable="true" title="M&#xe3; " type="java.lang.Object"/>
+                <Column editable="true" title="T&#xea;n " type="java.lang.Object"/>
                 <Column editable="true" title="Ch&#x1ee9;c v&#x1ee5;" type="java.lang.Object"/>
-                <Column editable="true" title="Email" type="java.lang.Object"/>
-                <Column editable="true" title="Qu&#xea; qu&#xe1;n" type="java.lang.Object"/>
-                <Column editable="true" title="SDT" type="java.lang.Object"/>
+                <Column editable="true" title="CongViec" type="java.lang.Object"/>
+                <Column editable="true" title="N&#x103;m sinh" type="java.lang.Object"/>
                 <Column editable="true" title="Gi&#x1edb;i t&#xed;nh " type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_DataMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -381,6 +387,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LamMoiActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_Xoa">
       <Properties>

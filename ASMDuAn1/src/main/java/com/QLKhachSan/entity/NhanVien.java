@@ -12,19 +12,23 @@ import java.util.Date;
  * @author ASUS
  */
 public class NhanVien {
-    private String maNV;
-    private String tenNV;
-    private String chucVu;
-    private String congViec;
-    private Date ngaySinh =XDate.addDays(new Date(), -365*20);
-    private boolean gioTinh;
+    public String maNV;
+    public String tenNV;
+    public String chucVu;
+    public String congViec;
+    public Date ngaySinh;
+    public boolean gioiTinh;
 
-    public NhanVien(String maNV, String tenNV, String chucVu, String congViec, boolean gioTinh) {
+    public NhanVien(String maNV, String tenNV, String chucVu, String congViec, Date ngaySinh, boolean gioiTinh) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.chucVu = chucVu;
         this.congViec = congViec;
-        this.gioTinh = gioTinh;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+    }
+
+    public NhanVien() {
     }
 
     public String getMaNV() {
@@ -67,13 +71,16 @@ public class NhanVien {
         this.ngaySinh = ngaySinh;
     }
 
-    public boolean isGioTinh() {
-        return gioTinh;
+    public boolean isGioiTinh() {
+        return gioiTinh;
     }
 
-    public void setGioTinh(boolean gioTinh) {
-        this.gioTinh = gioTinh;
+    public void setGioiTinh(boolean gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
-    
+
     
 }
+
+    
+    
