@@ -109,14 +109,13 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         return NhanVien;
     }
     // Ví dụ khởi tạo JComboBox
-    
 
     public void showThongTin(int i) {
         NhanVien NV = listsp.get(i);
         txt_MaNV.setText(NV.maNV);
         txt_TenNV.setText(NV.tenNV);
         cbo_ChucVu.setSelectedItem(NV.chucVu);
-        
+
         txt_CongViec.setText(NV.congViec);
         txt_NamSinh.setText(String.valueOf(NV.ngaySinh));
         if (NV.gioiTinh) {
@@ -131,9 +130,10 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
 //        } else {
 //            cbo_ChucVu.setSelectedItem("Lễ Tân");
 //        }
-        
+
         txt_MaNV.setEditable(false); // cấm sửa     
     }
+
     public void lammoi() throws SQLException {
         listsp.clear();
         String t = "";
@@ -149,34 +149,35 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     // Phương thức để phân tích ngày từ chuỗi
     // Hoặc định dạng của bạn
-    
-    
+
     public void them() throws SQLException {
-        NhanVien NhanVien = getForm();
+        NhanVien NV = getForm();
         if (JOptionPane.showConfirmDialog(this,
                 "Bạn có muốn thêm hay không?") == 0) {
             String SQL = "INSERT INTO NHANVIEN (MaNV, TenNV, ChucVu, CongViec, NamSinh, GioiTinh) VALUES(?,?,?,?,?,?)";
             PreparedStatement st = con.prepareStatement(SQL);
-            // st.setString(1, sv.maTS);
-            String maNV = NhanVien.maNV.matches("^\\d+$") ? "PC" + NhanVien.maNV : NhanVien.maNV;
-            st.setString(1, maNV);
-            st.setString(2, NhanVien.tenNV);
-            st.setString(3, NhanVien.chucVu);
-            st.setString(4, NhanVien.congViec);
-            st.setDate(5, new java.sql.Date(NhanVien.ngaySinh.getTime())); // Chuyển đổi java.util.Date thành java.sql.Date
-            st.setBoolean(6, NhanVien.gioiTinh);
+            st.setString(1, NV.maNV);
+            st.setString(2, NV.tenNV);
+
+            // Lấy giới tính từ combo box
+            String chucVu = (String) cbo_ChucVu.getSelectedItem();
+            st.setString(3, chucVu);
+
+            st.setString(4, NV.congViec);
+            st.setBoolean(5, NV.gioiTinh);
+
             int rs = st.executeUpdate();
             if (rs > 0) {
-                JOptionPane.showMessageDialog(this, "thêm thành công");
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
                 lammoi();
                 listsp.clear();
                 loadTable();
             } else {
-                JOptionPane.showMessageDialog(this, "thêm không thành công");
+                JOptionPane.showMessageDialog(this, "Thêm không thành công");
             }
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -398,8 +399,18 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         });
 
         btn_Xoa.setText("Xóa");
+        btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaActionPerformed(evt);
+            }
+        });
 
         btn_CapNhat.setText("Cập nhật");
+        btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CapNhatActionPerformed(evt);
+            }
+        });
 
         btn_Thoat.setText("Thoát");
         btn_Thoat.addActionListener(new java.awt.event.ActionListener() {
@@ -494,6 +505,66 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
             Logger.getLogger(frm_QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_ThêmActionPerformed
+
+    private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
+        try {
+            capnhat();
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_CapNhatActionPerformed
+
+    private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
+        try {
+            xoa();
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_XoaActionPerformed
+    public void capnhat() throws SQLException {
+        NhanVien nhanvien = getForm();
+        if (JOptionPane.showConfirmDialog(this,
+                "Bạn có muốn sửa hay không?") == 0) {
+            String SQL = "UPDATE NHANVIEN SET TenNV = ?, ChucVu = ?, CongViec = ?, NamSinh = ?,GioiTinh? WHERE masv = ?";
+            PreparedStatement st = con.prepareStatement(SQL);
+            st.setString(1, nhanvien.tenNV);
+
+            // Lấy giới tính từ combo box
+            String chucVu = (String) cbo_ChucVu.getSelectedItem();
+            st.setString(3, chucVu);
+
+            st.setString(4, nhanvien.congViec);
+            st.setBoolean(5, nhanvien.gioiTinh);
+
+            int rs = st.executeUpdate();
+            if (rs > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                lammoi();
+                listsp.clear();
+                loadTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm không thành công");
+            }
+        }
+    }
+    
+    public void xoa() throws SQLException {
+        //  if(JOptionPane.showConfirmDialog(this, "bạn có muốn xóa hay không") == 0);
+        String SQL = "DELETE NHANVIEN WHERE MaNV = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setString(1, txt_MaNV.getText());
+        int rs = st.executeUpdate();
+        if (rs > 0) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            lammoi();
+            listsp.clear();
+            loadTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hàng để xóa");
+        }
+    }
 
     /**
      * @param args the command line arguments

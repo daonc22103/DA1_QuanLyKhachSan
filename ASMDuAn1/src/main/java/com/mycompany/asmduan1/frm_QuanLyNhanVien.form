@@ -398,11 +398,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_CapNhat">
       <Properties>
         <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CapNhatActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_Thoat">
       <Properties>
