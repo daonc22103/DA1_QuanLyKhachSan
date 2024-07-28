@@ -23,7 +23,7 @@ public class frm_QLKH extends javax.swing.JFrame {
     private QLKhachHang qlkh = new QLKhachHang();
     private ArrayList<Khachhang> arrKH = new ArrayList<>();
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
-    private Khachhang khachhang;
+    private Khachhang khachhang = new Khachhang();
 
     /**
      * Creates new form QuanLyThongTinKhachHang
