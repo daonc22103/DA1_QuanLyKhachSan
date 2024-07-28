@@ -116,6 +116,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         txt_MaNV.setText(NV.maNV);
         txt_TenNV.setText(NV.tenNV);
         cbo_ChucVu.setSelectedItem(NV.chucVu);
+        
         txt_CongViec.setText(NV.congViec);
         txt_NamSinh.setText(String.valueOf(NV.ngaySinh));
         if (NV.gioiTinh) {
@@ -125,11 +126,11 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
             rdo_Nam.setSelected(false);
             rdo_Nu.setSelected(true);
         }
-        if (NV.chucVu.equalsIgnoreCase("Quản Lý")) {
-            cbo_ChucVu.setSelectedItem("Quản Lý");
-        } else {
-            cbo_ChucVu.setSelectedItem("Lễ Tân");
-        }
+//        if (NV.chucVu.equalsIgnoreCase("Quản Lý")) {
+//            cbo_ChucVu.setSelectedItem("Quản Lý");
+//        } else {
+//            cbo_ChucVu.setSelectedItem("Lễ Tân");
+//        }
         
         txt_MaNV.setEditable(false); // cấm sửa     
     }
