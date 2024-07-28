@@ -72,7 +72,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
                 nv.tenNV = rs.getString("TenNV");
                 nv.chucVu = rs.getString("ChucVu");
                 nv.congViec = rs.getString("CongViec");
-                nv.ngaySinh = rs.getDate("NamSinh");
+                nv.ngaySinh = rs.getString("NamSinh");
                 try {
                     nv.gioiTinh = rs.getBoolean("GioiTinh");
                 } catch (SQLException ex) {
@@ -102,7 +102,8 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         NhanVien.tenNV = txt_TenNV.getText();
         NhanVien.chucVu = (String) cbo_ChucVu.getSelectedItem();
         NhanVien.congViec = txt_CongViec.getText();
-        NhanVien.ngaySinh = parseDate(txt_NamSinh.getText());
+        //NhanVien.ngaySinh = parseDate(txt_NamSinh.getText());
+        NhanVien.ngaySinh = txt_NamSinh.getText();
         NhanVien.gioiTinh = rdo_Nam.isSelected();
         //isSelected kiểm tra đã chon hay
 
@@ -118,7 +119,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
 
         txt_CongViec.setText(NV.congViec);
         txt_NamSinh.setText(String.valueOf(NV.ngaySinh));
-        if (NV.gioiTinh) {
+        if (NV.getGioiTinhString().equals("Nam")) {
             rdo_Nam.setSelected(true);
             rdo_Nu.setSelected(false);
         } else {
@@ -144,38 +145,98 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         txt_NamSinh.setText(t);
         buttonGroup1.clearSelection();//Xóa lựa chọn
         txt_MaNV.setEditable(true);
+        txt_TimTenNV.setText(t);
         loadTable();
     }
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    // private static final String DATE_FORMAT = "yyyy-MM-dd";
     // Phương thức để phân tích ngày từ chuỗi
     // Hoặc định dạng của bạn
 
     public void them() throws SQLException {
         NhanVien NV = getForm();
-        if (JOptionPane.showConfirmDialog(this,
-                "Bạn có muốn thêm hay không?") == 0) {
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm hay không?") == JOptionPane.YES_OPTION) {
             String SQL = "INSERT INTO NHANVIEN (MaNV, TenNV, ChucVu, CongViec, NamSinh, GioiTinh) VALUES(?,?,?,?,?,?)";
-            PreparedStatement st = con.prepareStatement(SQL);
-            st.setString(1, NV.maNV);
-            st.setString(2, NV.tenNV);
+            try (PreparedStatement st = con.prepareStatement(SQL)) {
+                // Nếu MaNV là số nguyên, dùng setInt
+                st.setString(1, NV.maNV);  // Nếu MaNV là số nguyên, thay thế bằng st.setInt(1, Integer.parseInt(NV.maNV));
 
-            // Lấy giới tính từ combo box
-            String chucVu = (String) cbo_ChucVu.getSelectedItem();
-            st.setString(3, chucVu);
+                st.setString(2, NV.tenNV);
 
-            st.setString(4, NV.congViec);
-            st.setBoolean(5, NV.gioiTinh);
+                // Lấy giá trị chức vụ từ JComboBox
+                String chucVu = (String) cbo_ChucVu.getSelectedItem();
+                st.setString(3, chucVu);
 
-            int rs = st.executeUpdate();
-            if (rs > 0) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
-                lammoi();
-                listsp.clear();
-                loadTable();
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm không thành công");
+                if (chucVu == null) {
+                    JOptionPane.showMessageDialog(this, "Chức vụ không thể để trống.");
+                    return;
+                }
+                
+
+                st.setString(4, NV.congViec);
+
+                // Thiết lập ngày sinh, cần đảm bảo định dạng là yyyy-MM-dd
+                java.sql.Date sqlDate = null;
+                try {
+                    sqlDate = java.sql.Date.valueOf(NV.ngaySinh); // Định dạng yyyy-MM-dd
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ. Định dạng phải là yyyy-MM-dd.");
+                    return; // Dừng phương thức nếu ngày sinh không hợp lệ
+                }
+                st.setDate(5, sqlDate);
+
+                // Giả sử gioiTinh là boolean
+                st.setBoolean(6, NV.gioiTinh);
+
+                int rs = st.executeUpdate();
+                if (rs > 0) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+                    lammoi();
+                    listsp.clear();
+                    loadTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm không thành công");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();  // In lỗi để biết nguyên nhân cụ thể
+                JOptionPane.showMessageDialog(this, "Lỗi khi thêm dữ liệu: " + e.getMessage());
             }
         }
+    }
+
+    public void timkiem() throws SQLException {
+        //xóa dữ liệu phần tử trong listsv để hiện dữ liệu tìm kiếm
+        listsp.clear();
+        //lấy chuỗi tìm kiếm từ form nhập vào
+        String chuoi = txt_TimTenNV.getText();
+        // String SQL = "SELECT * FROM SINHVIEN WHERE masv = ? ";
+        String SQL = "SELECT * FROM NHANVIEN WHERE MaNV like ?  or TenNV like ?";
+        //thực thi câu lệnh SQL = PreparedStatement
+        PreparedStatement st = con.prepareStatement(SQL);
+        //thiết lập giá trị các tham số trong câu lệnh SQL
+        st.setString(1, "%" + chuoi + "%");
+        st.setString(2, "%" + chuoi + "%");
+        //executeQuery thực thi truy vấn và lấy kết quả gán vào ResualtSet
+        ResultSet rs = st.executeQuery();
+        //duyệt qua rs và tạo các đối tượng SinhVien, sau đó thêm chúng vào listsv
+        while (rs.next()) {
+            NhanVien nv = new NhanVien();
+            nv.maNV = rs.getString("MaNV");
+            nv.tenNV = rs.getString("TenNV");
+            nv.chucVu = rs.getString("ChucVu");
+            nv.congViec = rs.getString("CongViec");
+            nv.ngaySinh = rs.getString("NamSinh");
+            listsp.add(nv);
+        }
+        //tạo 1 mảng header định dạng tên cho từng cột bên trong tbl_Data(JTable)
+        String[] header = {"Mã", "Tên", "Chức vụ", "Công việc", "Ngày sinh", "Giới tính"};
+        DefaultTableModel model = new DefaultTableModel(header, 0);
+        for (NhanVien nv : listsp) {
+            Object[] row = {nv.maNV, nv.tenNV, nv.chucVu, nv.congViec, nv.ngaySinh, nv.gioiTinh};
+            model.addRow(row);
+        }
+        tbl_Data.setModel(model);
+        //đặt model cho JTable để hiển thị dữ liệu
+        tbl_Data.setModel(model);
     }
 
     /**
@@ -191,7 +252,6 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        txt_TimMaNV = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_TimTenNV = new javax.swing.JTextField();
@@ -229,12 +289,17 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm Kiếm"));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Mã nhân viên");
+        jLabel2.setText("Mã nhân viên    Và");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Tên nhân viên");
 
         btn_TimKiem.setText("Tìm kiếm");
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -244,12 +309,10 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(txt_TimMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(txt_TimTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(68, 68, 68)
+                .addComponent(txt_TimTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_TimKiem)
                 .addContainerGap())
         );
@@ -259,7 +322,6 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_TimMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txt_TimTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_TimKiem))
@@ -301,7 +363,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Chức vụ");
 
-        cbo_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chức vụ" }));
+        cbo_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản Lý", "Lễ Tân" }));
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -332,7 +394,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(rdo_Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rdo_Nu, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(rdo_Nu, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addComponent(txt_CongViec))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -523,33 +585,62 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
             Logger.getLogger(frm_QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_XoaActionPerformed
+
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+        try {
+            timkiem();
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
     public void capnhat() throws SQLException {
         NhanVien nhanvien = getForm();
-        if (JOptionPane.showConfirmDialog(this,
-                "Bạn có muốn sửa hay không?") == 0) {
-            String SQL = "UPDATE NHANVIEN SET TenNV = ?, ChucVu = ?, CongViec = ?, NamSinh = ?,GioiTinh? WHERE masv = ?";
+
+        // Xác nhận sửa đổi
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật hay không?") == JOptionPane.YES_OPTION) {
+            // Câu lệnh SQL
+            String SQL = "UPDATE NHANVIEN SET TenNV = ?, ChucVu = ?, CongViec = ?, NamSinh = ?, GioiTinh = ? WHERE MaNV = ?";
             PreparedStatement st = con.prepareStatement(SQL);
+
+            // Thiết lập các tham số cho câu lệnh SQL
             st.setString(1, nhanvien.tenNV);
 
-            // Lấy giới tính từ combo box
+            // Lấy chức vụ từ combo box
             String chucVu = (String) cbo_ChucVu.getSelectedItem();
-            st.setString(3, chucVu);
+            st.setString(2, chucVu);
 
-            st.setString(4, nhanvien.congViec);
+            st.setString(3, nhanvien.congViec);
+
+            // Kiểm tra và thiết lập ngày sinh
+            java.sql.Date sqlDate = null;
+            try {
+                sqlDate = java.sql.Date.valueOf(nhanvien.ngaySinh); // Kiểm tra định dạng yyyy-MM-dd
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ. Định dạng phải là yyyy-MM-dd.");
+                return; // Dừng phương thức nếu ngày sinh không hợp lệ
+            }
+            st.setDate(4, sqlDate);
+
+            // Giả sử gioiTinh là boolean
             st.setBoolean(5, nhanvien.gioiTinh);
 
+            // Đặt mã nhân viên (thực hiện sau cùng)
+            st.setString(6, nhanvien.maNV);
+
+            // Thực thi câu lệnh cập nhật
             int rs = st.executeUpdate();
             if (rs > 0) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                 lammoi();
                 listsp.clear();
                 loadTable();
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm không thành công");
+                JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
             }
         }
     }
-    
+
     public void xoa() throws SQLException {
         //  if(JOptionPane.showConfirmDialog(this, "bạn có muốn xóa hay không") == 0);
         String SQL = "DELETE NHANVIEN WHERE MaNV = ?";
@@ -632,7 +723,6 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField txt_MaNV;
     private javax.swing.JTextField txt_NamSinh;
     private javax.swing.JTextField txt_TenNV;
-    private javax.swing.JTextField txt_TimMaNV;
     private javax.swing.JTextField txt_TimTenNV;
     // End of variables declaration//GEN-END:variables
 

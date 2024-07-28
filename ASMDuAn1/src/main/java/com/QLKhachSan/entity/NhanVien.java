@@ -15,19 +15,19 @@ public class NhanVien {
     public String tenNV;
     public String chucVu;
     public String congViec;
-    public Date ngaySinh;
+    public String ngaySinh;
     public boolean gioiTinh;
 
-    public NhanVien(String maNV, String tenNV, String chucVu, String congViec, Date ngaySinh, boolean gioiTinh) {
+    public NhanVien() {
+    }
+
+    public NhanVien(String maNV, String tenNV, String chucVu, String congViec, String ngaySinh, boolean gioiTinh) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.chucVu = chucVu;
         this.congViec = congViec;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
-    }
-
-    public NhanVien() {
     }
 
     public String getMaNV() {
@@ -62,11 +62,11 @@ public class NhanVien {
         this.congViec = congViec;
     }
 
-    public Date getNgaySinh() {
+    public String getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
+    public void setNgaySinh(String ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -78,6 +78,9 @@ public class NhanVien {
         this.gioiTinh = gioiTinh;
     }
 
+     public String getGioiTinhString() {
+        return gioiTinh ? "Nam" : "Nữ";
+    }
     
 }
 
