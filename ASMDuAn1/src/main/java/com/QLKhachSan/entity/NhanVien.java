@@ -4,7 +4,6 @@
  */
 package com.QLKhachSan.entity;
 
-import com.QLKhachSan.utils.XDate;
 import java.util.Date;
 
 /**

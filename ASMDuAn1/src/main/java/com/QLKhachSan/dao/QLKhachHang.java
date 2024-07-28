@@ -6,7 +6,6 @@ package com.QLKhachSan.dao;
  */
 //package com.QLKhachSan.dao;
 import com.QLKhachSan.entity.Khachhang;
-import com.QLKhachSan.utils.XDate;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -21,10 +20,9 @@ import java.util.List;
  */
 public class QLKhachHang {
     public static ArrayList<Khachhang> getAllKhachHang() {
+        String sql = "SELECT * FROM KHACHHANG";
         ArrayList<Khachhang> khachHangArr = new ArrayList<Khachhang>();
         try {
-            String sql = "SELECT * FROM KHACHHANG";
-
             Connection conn = XJdbc.getConnection();
             Statement state = conn.createStatement();
             ResultSet res = state.executeQuery(sql);
@@ -41,11 +39,11 @@ public class QLKhachHang {
                 khachhang.setEmail(res.getString("Email"));
                 khachHangArr.add(khachhang);
             }
-
+            return khachHangArr;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return khachHangArr;
+        return null;
     }
     public static int addKkhachhang(Khachhang khachhang) {
         String sql = "INSERT INTO KHACHHANG(MaKH, TenKH, GioiTinh, NgaySinh, CCCD, DiaChi, SDT, Email) VALUES(?,?,?,?,?,?,?,?)";

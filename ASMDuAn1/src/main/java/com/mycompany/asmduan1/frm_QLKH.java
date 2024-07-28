@@ -5,7 +5,6 @@ package com.mycompany.asmduan1;
  */
 import com.QLKhachSan.dao.QLKhachHang;
 import com.QLKhachSan.entity.Khachhang;
-import com.QLKhachSan.utils.XDate;
 import com.QLKhachSan.utils.XJdbc;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
