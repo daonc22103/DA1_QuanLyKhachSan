@@ -328,7 +328,8 @@ public class frm_form extends javax.swing.JFrame {
     }//GEN-LAST:event_mnu_ThongKeActionPerformed
 
     private void mnu_QuanLyThongKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_QuanLyThongKHActionPerformed
-           
+        frm_QLKH ql = new frm_QLKH();
+        ql.show();
         // TODO add your handling code here:
     }//GEN-LAST:event_mnu_QuanLyThongKHActionPerformed
 
