@@ -4,7 +4,6 @@
  */
 package com.QLKhachSan.entity;
 
-import com.QLKhachSan.utils.XDate;
 import java.util.Date;
 
 /**
@@ -23,6 +22,7 @@ public class Khachhang {
 
     public Khachhang() {
     }
+    
     public Khachhang(String maKH, String tenKH, int gioiTinh, String CCCD, String diaChi, String SDT, String Email) {
         this.maKH = maKH;
         this.tenKH = tenKH;
@@ -96,6 +96,7 @@ public class Khachhang {
     public void setEmail(String Email) {
         this.Email = Email;
     }
+
 
     public Object[] toObjectQLKH(){
         return new Object[] {

@@ -2,10 +2,12 @@ com\mycompany\asmduan1\QuanLiPhong$4.class
 com\mycompany\asmduan1\frm_QuanLyNhanVien$8.class
 com\mycompany\asmduan1\frm_QLKH$6.class
 com\mycompany\asmduan1\QuanLiThongKe.class
+com\mycompany\asmduan1\QuanLyDatPhong$4.class
 com\mycompany\asmduan1\QuanLiThongKe$3.class
 com\mycompany\asmduan1\QuanLyDatPhong.class
 com\mycompany\asmduan1\frm_form$3.class
 com\mycompany\asmduan1\frm_QLKH$3.class
+com\QLKhachSan\entity\DatPhong.class
 com\mycompany\asmduan1\frm_QLKH$9.class
 com\mycompany\asmduan1\QuanLyThanhToan$6.class
 com\mycompany\asmduan1\QuanLyThanhToan$9.class
@@ -24,6 +26,7 @@ com\mycompany\asmduan1\frmDangNhapND.class
 com\mycompany\asmduan1\frm_form$13.class
 com\mycompany\asmduan1\QuanLiPhong$10.class
 com\mycompany\asmduan1\QuanLiPhong$9.class
+com\QLKhachSan\dao\QLDatPhong.class
 com\mycompany\asmduan1\frm_QLKH$8.class
 com\mycompany\asmduan1\QuanLyThanhToan$1.class
 com\mycompany\asmduan1\frm_form$8.class
@@ -39,7 +42,6 @@ com\mycompany\asmduan1\frm_DangNhap$1.class
 com\mycompany\asmduan1\frm_form$9.class
 com\mycompany\asmduan1\frmDangNhapND$1.class
 com\mycompany\asmduan1\frm_QuanLyNhanVien$5.class
-com\QLKhachSan\utils\XDate.class
 com\mycompany\asmduan1\QuanLiThongKe$7.class
 com\mycompany\asmduan1\frm_QLKH$2.class
 com\mycompany\asmduan1\frm_form$2.class
@@ -64,6 +66,7 @@ com\mycompany\asmduan1\frm_QLKH.class
 com\mycompany\asmduan1\QuanLiThongKe$2.class
 com\mycompany\asmduan1\QuanLyDatPhong$2.class
 com\mycompany\asmduan1\frm_form$7.class
+com\mycompany\asmduan1\QuanLyDatPhong$5.class
 com\mycompany\asmduan1\QuanLyThanhToan$5.class
 com\mycompany\asmduan1\QuanLiThongKe$5.class
 com\mycompany\asmduan1\QuanLyThanhToan$4.class
