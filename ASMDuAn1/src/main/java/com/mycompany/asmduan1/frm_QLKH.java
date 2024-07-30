@@ -72,7 +72,8 @@ public class frm_QLKH extends javax.swing.JFrame {
         tbl_QLKhachHang = new javax.swing.JTable();
         btn_Tim = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        btn_Xoa1 = new javax.swing.JButton();
+        btn_Thoat = new javax.swing.JButton();
+        btn_LamMoi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,7 +234,15 @@ public class frm_QLKH extends javax.swing.JFrame {
             new String [] {
                 "Mã Khách Hàng", "Họ Tên", "Giới Tính", "Ngày Sinh", "CMND/CCCD", "Địa Chỉ", "SĐT", "Email"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbl_QLKhachHang.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tbl_QLKhachHangAncestorAdded(evt);
@@ -260,11 +269,19 @@ public class frm_QLKH extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel11.setText("THÔNG TIN KHÁCH HÀNG");
 
-        btn_Xoa1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_Xoa1.setText("Thoát");
-        btn_Xoa1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Thoat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_Thoat.setText("Thoát");
+        btn_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Xoa1ActionPerformed(evt);
+                btn_ThoatActionPerformed(evt);
+            }
+        });
+
+        btn_LamMoi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_LamMoi.setText("Làm mới");
+        btn_LamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LamMoiActionPerformed(evt);
             }
         });
 
@@ -273,31 +290,29 @@ public class frm_QLKH extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_Tim)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_Them)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_Sua)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_Xoa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_Xoa1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_TimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Tim)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Them)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Sua)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Xoa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_LamMoi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Thoat)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(234, 234, 234)
@@ -319,7 +334,8 @@ public class frm_QLKH extends javax.swing.JFrame {
                     .addComponent(btn_Them)
                     .addComponent(btn_Sua)
                     .addComponent(btn_Xoa)
-                    .addComponent(btn_Xoa1))
+                    .addComponent(btn_Thoat)
+                    .addComponent(btn_LamMoi))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -336,9 +352,9 @@ public class frm_QLKH extends javax.swing.JFrame {
         xoaTTKH();
     }//GEN-LAST:event_btn_XoaActionPerformed
 
-    private void btn_Xoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xoa1ActionPerformed
+    private void btn_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThoatActionPerformed
         hide();
-    }//GEN-LAST:event_btn_Xoa1ActionPerformed
+    }//GEN-LAST:event_btn_ThoatActionPerformed
 
     private void txt_MaKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_MaKhachHangActionPerformed
         // TODO add your handling code here:
@@ -368,21 +384,42 @@ public class frm_QLKH extends javax.swing.JFrame {
 
     private void btn_TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimActionPerformed
         String maKhachHang = txt_TimKiem.getText().trim();
-    if (maKhachHang.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng để tìm kiếm.");
-        return;
-    }
-    // Tìm kiếm khách hàng theo mã
-    Khachhang khachhang = qlkh.getKhachHangByMaKH(maKhachHang);
-    if (khachhang != null) {
-        // Hiển thị thông tin khách hàng trong form
-        fillFromTableQLKH(khachhang);
-    } else {
-        JOptionPane.showMessageDialog(this, "Khách hàng không tồn tại.");
-        // Xóa thông tin hiện tại trên form
-        lamMoiFromQLKhachHang();
-    }
+        if (maKhachHang.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã khách hàng để tìm kiếm.");
+            return;
+        }
+        // Tìm kiếm khách hàng theo mã
+        Khachhang khachhang = qlkh.getKhachHangByMaKH(maKhachHang);
+        if (khachhang != null) {
+            // Hiển thị thông tin khách hàng trong form
+            fillFromTableQLKH(khachhang);
+
+            DefaultTableModel model = (DefaultTableModel) tbl_QLKhachHang.getModel();
+            model.setRowCount(0); 
+
+            model.addRow(new Object[]{
+                khachhang.getMaKH(),
+                khachhang.getTenKH(),
+                khachhang.getGioiTinh(),
+                khachhang.getNgaySinh(),
+                khachhang.getCCCD(),
+                khachhang.getDiaChi(),
+                khachhang.getSDT(),
+                khachhang.getEmail()
+            });
+        } else {
+            JOptionPane.showMessageDialog(this, "Khách hàng không tồn tại.");
+            // Xóa thông tin hiện tại trên form
+            lamMoiFromQLKhachHang();
+            DefaultTableModel model = (DefaultTableModel) tbl_QLKhachHang.getModel();
+            model.setRowCount(0);
+        }
+
     }//GEN-LAST:event_btn_TimActionPerformed
+
+    private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
+        lamMoiFromQLKhachHang();
+    }//GEN-LAST:event_btn_LamMoiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,11 +458,12 @@ public class frm_QLKH extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_LamMoi;
     private javax.swing.JButton btn_Sua;
     private javax.swing.JButton btn_Them;
+    private javax.swing.JButton btn_Thoat;
     private javax.swing.JButton btn_Tim;
     private javax.swing.JButton btn_Xoa;
-    private javax.swing.JButton btn_Xoa1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -554,6 +592,7 @@ public class frm_QLKH extends javax.swing.JFrame {
         txt_DiaChi.setText(khachhang.getDiaChi());
         txt_SDT.setText(khachhang.getSDT());
         txt_Email.setText(khachhang.getEmail());
+        txt_MaKhachHang.setEditable(false);
     }
         public void themTTKH() {
         try {
