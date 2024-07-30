@@ -12,8 +12,8 @@ CREATE TABLE NHANVIEN (
 
 SELECT * FROM NHANVIEN
 INSERT INTO NHANVIEN (MaNV, TenNV, ChucVu, CongViec, NamSinh, GioiTinh)
-VALUES (1, N'Trần Văn A', N'Quản lý', N'Quản lý bộ phận marketing', '1990-05-15', N'Nam');
-
+VALUES (3, N'Trần Văn C', N'Lễ Tân', N'Hướng dẫn khách hàng', '1992-05-15', N'Nam'),
+(2, N'Nguyễn Thị B', N'Lễ tân', N'Tiếp đón khách và quản lý hồ sơ', '1985-12-22', N'Nữ');
 
 CREATE TABLE KHACHHANG (
     MaKH INT PRIMARY KEY,

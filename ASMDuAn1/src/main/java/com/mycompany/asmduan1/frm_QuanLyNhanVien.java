@@ -236,7 +236,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         }
         tbl_Data.setModel(model);
         //đặt model cho JTable để hiển thị dữ liệu
-        tbl_Data.setModel(model);
+       // tbl_Data.setModel(model);
     }
 
     /**
