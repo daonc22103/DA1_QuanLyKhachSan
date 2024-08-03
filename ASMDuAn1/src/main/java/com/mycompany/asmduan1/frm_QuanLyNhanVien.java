@@ -59,7 +59,8 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         //Statement dùng để thực thi truy vấn SQL 
         stm = con.createStatement();
     }
-
+    
+    
     public void loadTable() throws SQLException {
         // Câu truy vấn SQL
         String SQL = "SELECT * FROM NHANVIEN"; // Đảm bảo tên bảng là NHANVIEN, thay cho SanPham
@@ -132,7 +133,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
 //            cbo_ChucVu.setSelectedItem("Lễ Tân");
 //        }
 
-        txt_MaNV.setEditable(false); // cấm sửa     
+        txt_MaNV.setEditable(false); // cấm sửa  
     }
 
     public void lammoi() throws SQLException {
@@ -165,13 +166,13 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
                 // Lấy giá trị chức vụ từ JComboBox
                 String chucVu = (String) cbo_ChucVu.getSelectedItem();
                 st.setString(3, chucVu);
-
+                
                 if (chucVu == null) {
                     JOptionPane.showMessageDialog(this, "Chức vụ không thể để trống.");
                     return;
                 }
                 
-
+                
                 st.setString(4, NV.congViec);
 
                 // Thiết lập ngày sinh, cần đảm bảo định dạng là yyyy-MM-dd
@@ -238,7 +239,6 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         //đặt model cho JTable để hiển thị dữ liệu
        // tbl_Data.setModel(model);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
