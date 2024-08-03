@@ -22,6 +22,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
     private XJdbc xJdbc = new XJdbc();
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private ArrayList<DatPhong> arrDP = new ArrayList<>();
+    private QuanLiPhong qlp = new QuanLiPhong();
 
     /**
      * Creates new form QuanLyDatPhong
@@ -62,10 +63,10 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_LoaiPhong = new javax.swing.JTable();
-        btn_QuanLy = new javax.swing.JButton();
         btn_Thoat = new javax.swing.JButton();
-        btn_DangXuat = new javax.swing.JButton();
+        btn_LamMoi = new javax.swing.JButton();
         btn_DatPhong = new javax.swing.JButton();
+        btn_Thoat1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +81,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
         jLabel2.setText("Mã Phòng:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Mã Khách Hàng:");
+        jLabel3.setText("Tên Khách Hàng:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Số Người:");
@@ -162,20 +163,28 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Đặt Phòng"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Các Loại Phòng"));
         jPanel2.setToolTipText("");
 
         tbl_QLDatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Đặt Phòng", "Mã Phòng", "Mã Khách Hàng", "Số Người", "Giá Phòng", "Ngày Nhận Phòng"
+                "Mã Phòng", "Số Phòng", "Loại Phòng", "Giá Phòng", "Trạng Thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbl_QLDatPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_QLDatPhongMouseClicked(evt);
@@ -203,13 +212,13 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
 
         tbl_LoaiPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Số Phòng", "Loại Phòng", "Giá Phòng"
+                "Mã Đặt Phòng", "Mã Phòng", "Tên Khách Hàng", "Sô Người", "Giá Phòng", "Ngày Nhận Phòng", "Ngày Trả Phòng"
             }
         ));
         jScrollPane2.setViewportView(tbl_LoaiPhong);
@@ -220,7 +229,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -231,15 +240,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btn_QuanLy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/User.png"))); // NOI18N
-        btn_QuanLy.setText("Quản Lý");
-        btn_QuanLy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_QuanLyActionPerformed(evt);
-            }
-        });
-
-        btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
+        btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         btn_Thoat.setText("Thoát");
         btn_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,13 +248,26 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
             }
         });
 
-        btn_DangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
-        btn_DangXuat.setText("Đăng xuất");
+        btn_LamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
+        btn_LamMoi.setText("Làm Mới");
+        btn_LamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LamMoiActionPerformed(evt);
+            }
+        });
 
         btn_DatPhong.setText("Đặt Phòng");
         btn_DatPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_DatPhongActionPerformed(evt);
+            }
+        });
+
+        btn_Thoat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
+        btn_Thoat1.setText("Hủy DP");
+        btn_Thoat1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Thoat1ActionPerformed(evt);
             }
         });
 
@@ -263,21 +277,18 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_QuanLy, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(btn_Thoat)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_DangXuat))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btn_DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(147, 147, 147)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_LamMoi)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_Thoat))
+                            .addComponent(btn_DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Thoat1)
+                        .addGap(26, 26, 26)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -294,9 +305,9 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                         .addComponent(btn_DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_QuanLy)
                             .addComponent(btn_Thoat)
-                            .addComponent(btn_DangXuat))
+                            .addComponent(btn_LamMoi)
+                            .addComponent(btn_Thoat1))
                         .addGap(95, 95, 95))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,17 +315,11 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
+        jPanel2.getAccessibleContext().setAccessibleName("Các Loại Phòng\n");
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuanLyActionPerformed
-        frm_DangNhap ql = new frm_DangNhap();
-        ql.show();
-        hide();
-        
-// TODO add your handling code here:
-    }//GEN-LAST:event_btn_QuanLyActionPerformed
 
     private void btn_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThoatActionPerformed
         hide();
@@ -334,6 +339,14 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Chưa chọn phòng nào.");    
         };
     }//GEN-LAST:event_tbl_QLDatPhongMouseClicked
+
+    private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_LamMoiActionPerformed
+
+    private void btn_Thoat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Thoat1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Thoat1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,10 +384,10 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_DangXuat;
     private javax.swing.JButton btn_DatPhong;
-    private javax.swing.JButton btn_QuanLy;
+    private javax.swing.JButton btn_LamMoi;
     private javax.swing.JButton btn_Thoat;
+    private javax.swing.JButton btn_Thoat1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

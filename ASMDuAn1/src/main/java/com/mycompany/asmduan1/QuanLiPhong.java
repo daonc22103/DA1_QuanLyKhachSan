@@ -5,6 +5,7 @@
 package com.mycompany.asmduan1;
 
 import com.QLKhachSan.dao.QLPhong;
+import com.QLKhachSan.entity.DatPhong;
 import com.QLKhachSan.entity.Khachhang;
 import com.QLKhachSan.entity.Phong;
 import com.QLKhachSan.utils.XJdbc;
@@ -54,13 +55,13 @@ public class QuanLiPhong extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txt_MaPhong = new javax.swing.JTextField();
         txt_SoPhong = new javax.swing.JTextField();
-        txt_TrangThaiP = new javax.swing.JTextField();
         txt_DonGia = new javax.swing.JTextField();
         btn_Them = new javax.swing.JButton();
         btn_LamMoi = new javax.swing.JButton();
         btn_Xoa = new javax.swing.JButton();
         btn_CapNhat = new javax.swing.JButton();
         cbo_LoaiPhong = new javax.swing.JComboBox<>();
+        cbo_LoaiPhong1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_QLPhong = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
@@ -133,6 +134,8 @@ public class QuanLiPhong extends javax.swing.JFrame {
 
         cbo_LoaiPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Standard Room", "Superior Room", "Deluxe Room", "Family Room", "Penthouse" }));
 
+        cbo_LoaiPhong1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trống", "Đang sử dụng", "Dọn phòng", "Đặt trước", "Đã trả phòng" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -149,18 +152,18 @@ public class QuanLiPhong extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txt_DonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_TrangThaiP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbo_LoaiPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_SoPhong)
-                            .addComponent(cbo_LoaiPhong, 0, 119, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_SoPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbo_LoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addComponent(btn_Them, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -179,7 +182,7 @@ public class QuanLiPhong extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_MaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txt_TrangThaiP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbo_LoaiPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_SoPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,11 +192,11 @@ public class QuanLiPhong extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbo_LoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Them)
                     .addComponent(btn_CapNhat)
                     .addComponent(btn_LamMoi)
-                    .addComponent(btn_Xoa))
+                    .addComponent(btn_Xoa)
+                    .addComponent(cbo_LoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -218,6 +221,7 @@ public class QuanLiPhong extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbl_QLPhong);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 255));
         jLabel6.setText("QUẢN LÝ PHÒNG");
 
         txt_TimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -382,6 +386,7 @@ public class QuanLiPhong extends javax.swing.JFrame {
     private javax.swing.JButton btn_Tim;
     private javax.swing.JButton btn_Xoa;
     private javax.swing.JComboBox<String> cbo_LoaiPhong;
+    private javax.swing.JComboBox<String> cbo_LoaiPhong1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -396,7 +401,6 @@ public class QuanLiPhong extends javax.swing.JFrame {
     private javax.swing.JTextField txt_MaPhong;
     private javax.swing.JTextField txt_SoPhong;
     private javax.swing.JTextField txt_TimKiem;
-    private javax.swing.JTextField txt_TrangThaiP;
     // End of variables declaration//GEN-END:variables
     public void fillTableQLPhong() {
         arrP= qlp.getAllPhong();
@@ -411,14 +415,14 @@ public class QuanLiPhong extends javax.swing.JFrame {
         txt_SoPhong.setText("");
         txt_DonGia.setText("");
         cbo_LoaiPhong.setSelectedIndex(0); 
-        txt_TrangThaiP.setText("");
+        cbo_LoaiPhong1.setSelectedIndex(0);
     }
     public Phong readFromQLPhong() {
         String maPhong = txt_MaPhong.getText();
         int soPhong = Integer.parseInt(txt_SoPhong.getText());
         float giaPhong = Float.parseFloat(txt_DonGia.getText());
         String loaiPhong = (String) cbo_LoaiPhong.getSelectedItem();
-        String trangThai = txt_TrangThaiP.getText();
+        String trangThai = (String) cbo_LoaiPhong1.getSelectedItem();
         return new Phong(maPhong, soPhong, giaPhong, loaiPhong, trangThai);
     }
     public void fillFromTableQLPhong(Phong phong) {
@@ -426,7 +430,7 @@ public class QuanLiPhong extends javax.swing.JFrame {
         txt_SoPhong.setText(String.valueOf(phong.getSoPhong()));
         txt_DonGia.setText(String.valueOf(phong.getGiaPhong()));
         cbo_LoaiPhong.setSelectedItem(phong.getLoaiPhong());
-        txt_TrangThaiP.setText(phong.getTrangThaiP());
+        cbo_LoaiPhong1.setSelectedItem(phong.getTrangThaiP());
     }
         private boolean checkValueFromQLPhong() {
     // Kiểm tra mã phòng không để trống
@@ -486,10 +490,10 @@ public class QuanLiPhong extends javax.swing.JFrame {
         }
 
         // Kiểm tra tình trạng phòng
-        String tinhTrang = txt_TrangThaiP.getText().trim();
-        if (tinhTrang.isEmpty()) {
+        String tinhTrang = (String) cbo_LoaiPhong1.getSelectedItem();
+        if (tinhTrang == null || tinhTrang.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tình trạng không được để trống.");
-            txt_TrangThaiP.requestFocus();
+            cbo_LoaiPhong1.requestFocus();
             return false;
         }
 
@@ -530,8 +534,7 @@ public class QuanLiPhong extends javax.swing.JFrame {
 
     private void xoaPhong() {
         try {
-            String maPhong = txt_MaPhong.getText().trim();
-            if (!maPhong.isEmpty()) {
+            if (checkValueFromQLPhong()) {
                 int result = qlp.DeletePhong(phong);
                 if (result > 0) {
                     JOptionPane.showMessageDialog(this, "Xóa dữ liệu thành công");
@@ -561,5 +564,9 @@ public class QuanLiPhong extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Phòng không tồn tại.");
             lamMoiFromQLPhong();
         }
+    }
+
+    ArrayList<DatPhong> getAllPhong() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

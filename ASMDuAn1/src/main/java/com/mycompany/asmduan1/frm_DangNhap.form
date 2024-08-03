@@ -38,7 +38,7 @@
                           <Component id="txt_MatKhau" min="-2" pref="204" max="-2" attributes="0"/>
                           <Component id="txt_TaiKhoan" min="-2" pref="204" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jRadioButton1" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="rdo_GhiNho" min="-2" pref="98" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btn_DangNhap" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -74,7 +74,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdo_GhiNho" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_DangNhap" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -113,12 +113,12 @@
         <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="rdo_GhiNho">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ghi nh&#x1edb;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdo_GhiNhoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">

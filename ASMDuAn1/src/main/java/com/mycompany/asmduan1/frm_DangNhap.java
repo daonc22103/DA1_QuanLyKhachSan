@@ -33,7 +33,7 @@ public class frm_DangNhap extends javax.swing.JFrame {
         txt_MatKhau = new javax.swing.JPasswordField();
         btn_DangNhap = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        rdo_GhiNho = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -52,10 +52,10 @@ public class frm_DangNhap extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Mật khẩu");
 
-        jRadioButton1.setText("Ghi nhớ");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rdo_GhiNho.setText("Ghi nhớ");
+        rdo_GhiNho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rdo_GhiNhoActionPerformed(evt);
             }
         });
 
@@ -82,7 +82,7 @@ public class frm_DangNhap extends javax.swing.JFrame {
                             .addComponent(txt_MatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rdo_GhiNho, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_DangNhap)))
                         .addGap(55, 55, 55))
@@ -109,7 +109,7 @@ public class frm_DangNhap extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
+                            .addComponent(rdo_GhiNho)
                             .addComponent(btn_DangNhap))))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -118,9 +118,9 @@ public class frm_DangNhap extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rdo_GhiNhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_GhiNhoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rdo_GhiNhoActionPerformed
 
     private void btn_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhapActionPerformed
         String taikhoan = txt_TaiKhoan.getText();
@@ -187,7 +187,7 @@ public class frm_DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton rdo_GhiNho;
     private javax.swing.JPasswordField txt_MatKhau;
     private javax.swing.JTextField txt_TaiKhoan;
     // End of variables declaration//GEN-END:variables
