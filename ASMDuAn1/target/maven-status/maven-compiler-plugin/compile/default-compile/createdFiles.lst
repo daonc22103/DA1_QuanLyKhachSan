@@ -24,7 +24,10 @@ com\mycompany\asmduan1\frm_QLKH$8.class
 com\mycompany\asmduan1\frm_form$8.class
 com\mycompany\asmduan1\QuanLiPhong$5.class
 com\mycompany\asmduan1\QuanLiThongKe$1.class
+<<<<<<< Updated upstream
 com\mycompany\asmduan1\frm_form2$11.class
+=======
+>>>>>>> Stashed changes
 com\mycompany\asmduan1\QuanLyDatPhong$7.class
 com\QLKhachSan\entity\Khachhang.class
 com\mycompany\asmduan1\frm_form$11.class
@@ -53,7 +56,10 @@ com\mycompany\asmduan1\frm_QLKH$4.class
 com\mycompany\asmduan1\frmDangNhapND$5.class
 com\mycompany\asmduan1\QuanLiPhong$6.class
 com\mycompany\asmduan1\frm_form$5.class
+<<<<<<< Updated upstream
 com\mycompany\asmduan1\frm_form2$13.class
+=======
+>>>>>>> Stashed changes
 com\mycompany\asmduan1\frm_QuanLyNhanVien$9.class
 com\QLKhachSan\entity\Phong.class
 com\mycompany\asmduan1\frm_form$6.class
@@ -62,7 +68,10 @@ com\mycompany\asmduan1\frm_QLKH$5.class
 com\QLKhachSan\utils\XJdbc.class
 com\mycompany\asmduan1\QuanLyDatPhong$3.class
 com\mycompany\asmduan1\QuanLiPhong$7.class
+<<<<<<< Updated upstream
 com\mycompany\asmduan1\frm_form2$14.class
+=======
+>>>>>>> Stashed changes
 com\QLKhachSan\dao\QLKhachHang.class
 com\mycompany\asmduan1\frm_QLKH$6.class
 com\mycompany\asmduan1\QuanLyDatPhong$4.class

@@ -1,4 +1,5 @@
 package com.mycompany.asmduan1;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class frm_QLKH extends javax.swing.JFrame {
+
     private XJdbc xJdbc = new XJdbc();
     private QLKhachHang qlkh = new QLKhachHang();
     private ArrayList<Khachhang> arrKH = new ArrayList<>();
@@ -31,9 +33,11 @@ public class frm_QLKH extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    public void init(){
+
+    public void init() {
         fillTableQLKhachHang();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -375,7 +379,7 @@ public class frm_QLKH extends javax.swing.JFrame {
             Khachhang selectedKhachhang = arrKH.get(index);
             fillFromTableQLKH(selectedKhachhang);
         } else {
-            JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng nào.");    
+            JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng nào.");
         };
     }//GEN-LAST:event_tbl_QLKhachHangMouseClicked
 
@@ -396,7 +400,7 @@ public class frm_QLKH extends javax.swing.JFrame {
             fillFromTableQLKH(khachhang);
 
             DefaultTableModel model = (DefaultTableModel) tbl_QLKhachHang.getModel();
-            model.setRowCount(0); 
+            model.setRowCount(0);
 
             model.addRow(new Object[]{
                 khachhang.getMaKH(),
@@ -491,16 +495,17 @@ public class frm_QLKH extends javax.swing.JFrame {
     private javax.swing.JTextField txt_TenKhachHang;
     private javax.swing.JTextField txt_TimKiem;
     // End of variables declaration//GEN-END:variables
-    
+
     public void fillTableQLKhachHang() {
-        arrKH= qlkh.getAllKhachHang();
+        arrKH = qlkh.getAllKhachHang();
         defaultTableModel = (DefaultTableModel) tbl_QLKhachHang.getModel();
         defaultTableModel.setRowCount(0);
         for (Khachhang list : arrKH) {
             defaultTableModel.addRow(list.toObjectQLKH());
         }
     }
-        public void lamMoiFromQLKhachHang() {
+
+    public void lamMoiFromQLKhachHang() {
         txt_MaKhachHang.setText("");
         txt_TenKhachHang.setText("");
         rdo_Nam.setSelected(false);
@@ -511,47 +516,59 @@ public class frm_QLKH extends javax.swing.JFrame {
         txt_SDT.setText("");
         txt_Email.setText("");
     }
-        public boolean checkValueFromTTKH() {
-            // Kiểm tra các trường khác
-            if (txt_MaKhachHang.getText().trim().isEmpty() || 
-                txt_TenKhachHang.getText().trim().isEmpty() || 
-                txt_NgaySinh.getText().trim().isEmpty() ||
-                txt_CCCD.getText().trim().isEmpty() || 
-                txt_DiaChi.getText().trim().isEmpty() || 
-                txt_SDT.getText().trim().isEmpty() || 
-                txt_Email.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin.");
-                return false;
-            }
 
-            if (!rdo_Nam.isSelected() && !rdo_Nu.isSelected()) {
-                JOptionPane.showMessageDialog(this, "Chưa chọn giới tính.");
-                return false;
-            }
+    public boolean checkValueFromTTKH() {
+        // Kiểm tra các trường khác
+        if (txt_MaKhachHang.getText().trim().isEmpty()
+                || txt_TenKhachHang.getText().trim().isEmpty()
+                || txt_NgaySinh.getText().trim().isEmpty()
+                || txt_CCCD.getText().trim().isEmpty()
+                || txt_DiaChi.getText().trim().isEmpty()
+                || txt_SDT.getText().trim().isEmpty()
+                || txt_Email.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin.");
+            return false;
+        }
 
-            // Kiểm tra số điện thoại
-            String pSDT = "^(0|\\+84)[1-9][0-9]{8,10}$";
-            if (!txt_SDT.getText().matches(pSDT)) {
-                JOptionPane.showMessageDialog(this, "Nhập không đúng định dạng số điện thoại.");
-                return false;
-            }
+        if (!rdo_Nam.isSelected() && !rdo_Nu.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn giới tính.");
+            return false;
+        }
 
-            // Kiểm tra email
-            String pEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-            if (!txt_Email.getText().matches(pEmail)) {
-                JOptionPane.showMessageDialog(this, "Nhập không đúng định dạng email.");
-                return false;
-            }
+        // Kiểm tra số điện thoại
+        String pSDT = "^(0|\\+84)[1-9][0-9]{8,10}$";
+        if (!txt_SDT.getText().matches(pSDT)) {
+            JOptionPane.showMessageDialog(this, "Nhập không đúng định dạng số điện thoại.");
+            return false;
+        }
 
-            // Kiểm tra số CCCD
-            String pCCCD = "^\\d{12}$"; // CCCD có 12 ký tự số
-            if (!txt_CCCD.getText().matches(pCCCD)) {
-                JOptionPane.showMessageDialog(this, "Số CCCD không hợp lệ. Phải có 12 ký tự số.");
-                return false;
-            }
+        // Kiểm tra email
+        String pEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        if (!txt_Email.getText().matches(pEmail)) {
+            JOptionPane.showMessageDialog(this, "Nhập không đúng định dạng email.");
+            return false;
+        }
 
+        // Kiểm tra số CCCD
+        String pCCCD = "^\\d{12}$"; // CCCD có 12 ký tự số
+        if (!txt_CCCD.getText().matches(pCCCD)) {
+            JOptionPane.showMessageDialog(this, "Số CCCD không hợp lệ. Phải có 12 ký tự số.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkDate(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(dateStr);
             return true;
-}
+        } catch (ParseException e) {
+            return false;
+        }
+    }
 
     public Khachhang readFromTTKH() {
         Khachhang khachhang = new Khachhang();
@@ -565,7 +582,7 @@ public class frm_QLKH extends javax.swing.JFrame {
         ngaySinh = txt_NgaySinh.getText();
         CCCD = txt_CCCD.getText();
         diaChi = txt_DiaChi.getText();
-        SDT =  txt_SDT.getText();
+        SDT = txt_SDT.getText();
         Email = txt_Email.getText();
 
         khachhang.setMaKH(maKH);
@@ -577,9 +594,9 @@ public class frm_QLKH extends javax.swing.JFrame {
         khachhang.setSDT(SDT);
         khachhang.setEmail(Email);
 
-
         return khachhang;
     }
+
     public void fillFromTableQLKH(Khachhang khachhang) {
         txt_MaKhachHang.setText(khachhang.getMaKH());
         txt_TenKhachHang.setText(khachhang.getTenKH());
@@ -595,9 +612,10 @@ public class frm_QLKH extends javax.swing.JFrame {
         txt_Email.setText(khachhang.getEmail());
         txt_MaKhachHang.setEditable(false);
     }
-        public void themTTKH() {
+
+    public void themTTKH() {
         try {
-            if (checkValueFromTTKH()) {
+            if (checkValueFromTTKH() && checkDate(txt_NgaySinh.getText())) {
                 Khachhang khachhang = readFromTTKH();
                 qlkh.addKkhachhang(khachhang);
                 JOptionPane.showMessageDialog(this, "Thêm dữ liệu thành công");
@@ -609,9 +627,10 @@ public class frm_QLKH extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-        public void suaTTKH() {
+
+    public void suaTTKH() {
         try {
-            if (checkValueFromTTKH()) {
+            if (checkValueFromTTKH() && checkDate(txt_NgaySinh.getText())) {
                 Khachhang khachhang = readFromTTKH();
                 qlkh.updateKhachhang(khachhang);
                 JOptionPane.showMessageDialog(this, "Cập nhật dữ liệu thành công");
@@ -623,27 +642,28 @@ public class frm_QLKH extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-        public void xoaTTKH() {
-            try {
-                String maKhachHang = txt_MaKhachHang.getText().trim();
-                if (!maKhachHang.isEmpty()) {
-                    Khachhang khachhang = new Khachhang();
-                    khachhang.setMaKH(maKhachHang);
 
-                    int result = qlkh.DeleteKhachHang(khachhang);
-                    if (result > 0) {
-                        JOptionPane.showMessageDialog(this, "Xóa dữ liệu thành công");
-                        fillTableQLKhachHang();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng với Mã đã cho");
-                    }
+    public void xoaTTKH() {
+        try {
+            String maKhachHang = txt_MaKhachHang.getText().trim();
+            if (!maKhachHang.isEmpty()) {
+                Khachhang khachhang = new Khachhang();
+                khachhang.setMaKH(maKhachHang);
+
+                int result = qlkh.DeleteKhachHang(khachhang);
+                if (result > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa dữ liệu thành công");
+                    fillTableQLKhachHang();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Mã khách hàng không được để trống");
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy khách hàng với Mã đã cho");
                 }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Mã khách hàng phải là số hợp lệ", "Error", JOptionPane.ERROR_MESSAGE);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Lỗi khi xóa dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Mã khách hàng không được để trống");
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Mã khách hàng phải là số hợp lệ", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi xóa dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
 }

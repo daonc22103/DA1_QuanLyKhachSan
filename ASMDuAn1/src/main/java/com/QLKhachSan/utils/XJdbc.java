@@ -39,7 +39,7 @@ public class XJdbc {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=QLKHACHSAN;encrypt=true;trustServerCertificate=true";
             String USERNAME = "sa";
-            String PASSWORD = "123";
+            String PASSWORD = "123456";
             
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement(sql);
