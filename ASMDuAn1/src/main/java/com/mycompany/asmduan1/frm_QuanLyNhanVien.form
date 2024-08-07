@@ -309,9 +309,12 @@
         <Component class="javax.swing.JComboBox" name="cbo_ChucVu">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="5">
                 <StringItem index="0" value="Qu&#x1ea3;n L&#xfd;"/>
                 <StringItem index="1" value="L&#x1ec5; T&#xe2;n"/>
+                <StringItem index="2" value="Tr&#x1b0;&#x1edf;ng Ph&#xf2;ng"/>
+                <StringItem index="3" value="Lao c&#xf4;ng"/>
+                <StringItem index="4" value="B&#x1ea3;o v&#x1ec7;"/>
               </StringArray>
             </Property>
           </Properties>

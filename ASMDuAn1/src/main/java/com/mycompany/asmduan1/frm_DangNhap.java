@@ -131,7 +131,7 @@ public class frm_DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "mật khẩu không thể để trống!");
         } else if (taikhoan.equalsIgnoreCase("ql123") && (matkhau.equals("123456"))) {
             JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
-            frm_form ql = new frm_form();
+            frm_ql ql = new frm_ql();
             ql.show();
             hide();
         } else {

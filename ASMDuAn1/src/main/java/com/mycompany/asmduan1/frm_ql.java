@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author AD
  */
-public class frm_nhanvien extends javax.swing.JFrame {
+public class frm_ql extends javax.swing.JFrame {
 
     /**
      * Creates new form frm_form
      */
-    public frm_nhanvien() {
+    public frm_ql() {
         initComponents();
     }
 
@@ -185,7 +185,12 @@ public class frm_nhanvien extends javax.swing.JFrame {
         jMenu3.setText("Thống kê");
 
         mnu_DoanhThu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Notes.png"))); // NOI18N
-        mnu_DoanhThu.setText("Doanh thu");
+        mnu_DoanhThu.setText("Lương nhân viên");
+        mnu_DoanhThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_DoanhThuActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnu_DoanhThu);
 
         jMenuBar1.add(jMenu3);
@@ -299,6 +304,12 @@ public class frm_nhanvien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnu_QuanLyThongKHActionPerformed
 
+    private void mnu_DoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_DoanhThuActionPerformed
+    frm_LuongNV luong = new frm_LuongNV();
+    luong.show();
+// TODO add your handling code here:
+    }//GEN-LAST:event_mnu_DoanhThuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -316,21 +327,23 @@ public class frm_nhanvien extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frm_nhanvien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ql.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frm_nhanvien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ql.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frm_nhanvien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ql.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frm_nhanvien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_ql.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_nhanvien().setVisible(true);
+                new frm_ql().setVisible(true);
             }
         });
     }

@@ -9,13 +9,35 @@ CREATE TABLE NHANVIEN (
     NamSinh DATE,
     GioiTinh NVARCHAR(3)
 );
+ALTER TABLE NHANVIEN
+ADD 
+    LuongNgayCong DECIMAL(18, 2),
+    LuongCoBan DECIMAL(18, 2),
+    PhuCap DECIMAL(18, 2),
+    KhauTru DECIMAL(18, 2);
 
-SELECT * FROM NHANVIEN
-INSERT INTO NHANVIEN (MaNV, TenNV, ChucVu, CongViec, NamSinh, GioiTinh)
-VALUES (3, N'Trần Văn C', N'Lễ Tân', N'Hướng dẫn khách hàng', '1992-05-15', N'Nam'),
-(2, N'Nguyễn Thị B', N'Lễ tân', N'Tiếp đón khách và quản lý hồ sơ', '1985-12-22', N'Nữ');
 
 
+
+INSERT INTO NHANVIEN (MaNV, TenNV, ChucVu, CongViec, NamSinh, GioiTinh, LuongNgayCong, LuongCoBan, PhuCap, KhauTru)
+VALUES 
+(3, 'Nguyen Van A', 'Nhan Vien', 'Quan Ly', '1980-01-15', 'Nam', 3000000, 5000000, 1000000, 500000),
+(4, 'Le Thi B', 'Truong Phong', 'Ke Toan', '1975-07-22', 'Nu', 4000000, 6000000, 800000, 400000);
+
+SELECT * FROM NHANVIEN;
+
+UPDATE NHANVIEN
+SET 
+    LuongNgayCong = 300000,
+    LuongCoBan = 9000000,
+    PhuCap = 500000,
+    KhauTru = 200000
+WHERE MaNV = 2;
+
+
+UPDATE NHANVIEN
+SET GioiTinh = 'Nam'
+WHERE MaNV = 2;
 
 CREATE TABLE KHACHHANG (
     MaKH INT PRIMARY KEY,
