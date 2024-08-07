@@ -236,7 +236,7 @@ public class frm_QLKH extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Khách Hàng", "Họ Tên", "Giới Tính", "Ngày Sinh", "CMND/CCCD", "Địa Chỉ", "SĐT", "Email"
+                "Mã Khách Hàng", "Họ Và Tên", "Giới Tính", "Ngày Sinh", "CMND/CCCD", "Địa Chỉ", "SĐT", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {

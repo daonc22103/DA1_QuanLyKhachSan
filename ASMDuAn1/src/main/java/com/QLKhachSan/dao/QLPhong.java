@@ -4,7 +4,6 @@
  */
 package com.QLKhachSan.dao;
 
-import com.QLKhachSan.entity.Khachhang;
 import com.QLKhachSan.entity.Phong;
 import com.QLKhachSan.utils.XJdbc;
 import java.sql.Connection;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  */
 public class QLPhong {
     public static ArrayList<Phong> getAllPhong() {
-        ArrayList<Phong> phongArr = new ArrayList<Phong>();
+        ArrayList<Phong> phongArr = new ArrayList<>();
         try {
             String sql = "SELECT * FROM PHONG";
 
@@ -110,5 +109,17 @@ public class QLPhong {
                 }
                 return null;
             }
+        public void updateRoomStatus(String maPhong, String status) {
+        // Implement the logic to update the room status in the database
+        String sql = "UPDATE PHONG SET TrangThaiP = ? WHERE MaPhong = ?";
+        try (Connection conn = XJdbc.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, status);
+            pstmt.setString(2, maPhong);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Lỗi khi cập nhật trạng thái phòng: " + e.getMessage());
+        }
+    }
 
 }

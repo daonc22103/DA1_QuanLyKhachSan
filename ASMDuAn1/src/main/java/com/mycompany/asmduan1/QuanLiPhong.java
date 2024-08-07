@@ -212,7 +212,15 @@ public class QuanLiPhong extends javax.swing.JFrame {
             new String [] {
                 "Mã phòng", "Số phòng", "Giá phòng", "Loại phòng", "Trạng thái Phòng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbl_QLPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_QLPhongMouseClicked(evt);

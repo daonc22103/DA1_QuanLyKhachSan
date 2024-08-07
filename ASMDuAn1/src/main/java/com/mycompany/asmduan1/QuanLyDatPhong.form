@@ -37,7 +37,7 @@
                           <Component id="btn_DatPhong" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btn_Thoat1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_HuyDP" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -62,7 +62,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_Thoat" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_LamMoi" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_Thoat1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_HuyDP" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                   </Group>
@@ -108,7 +108,7 @@
                       <Component id="txt_Gia" max="32767" attributes="0"/>
                       <Component id="txt_SoNguoi" max="32767" attributes="0"/>
                       <Component id="txt_MaPhong" max="32767" attributes="0"/>
-                      <Component id="txt_MaKH" pref="212" max="32767" attributes="0"/>
+                      <Component id="txt_TenKH" pref="212" max="32767" attributes="0"/>
                       <Component id="txt_MaDatPhong" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -138,7 +138,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_MaKH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_TenKH" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -227,7 +227,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_MaPhong">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_MaKH">
+        <Component class="javax.swing.JTextField" name="txt_TenKH">
         </Component>
         <Component class="javax.swing.JTextField" name="txt_SoNguoi">
         </Component>
@@ -289,14 +289,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tbl_QLDatPhong">
+            <Component class="javax.swing.JTable" name="tbl_QLPhong">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="4">
                     <Column editable="false" title="M&#xe3; Ph&#xf2;ng" type="java.lang.Object"/>
                     <Column editable="false" title="S&#x1ed1; Ph&#xf2;ng" type="java.lang.Object"/>
-                    <Column editable="false" title="Lo&#x1ea1;i Ph&#xf2;ng" type="java.lang.Object"/>
                     <Column editable="false" title="Gi&#xe1; Ph&#xf2;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="Lo&#x1ea1;i Ph&#xf2;ng" type="java.lang.Object"/>
                     <Column editable="false" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
                   </Table>
                 </Property>
@@ -334,7 +334,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_QLDatPhongMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_QLPhongMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -378,17 +378,17 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tbl_LoaiPhong">
+            <Component class="javax.swing.JTable" name="tbl_QLDatPhong">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="4">
-                    <Column editable="true" title="M&#xe3; &#x110;&#x1eb7;t Ph&#xf2;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="M&#xe3; Ph&#xf2;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="T&#xea;n Kh&#xe1;ch H&#xe0;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="S&#xf4; Ng&#x1b0;&#x1edd;i" type="java.lang.Object"/>
-                    <Column editable="true" title="Gi&#xe1; Ph&#xf2;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="Ng&#xe0;y Nh&#x1ead;n Ph&#xf2;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="Ng&#xe0;y Tr&#x1ea3; Ph&#xf2;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe3; &#x110;&#x1eb7;t Ph&#xf2;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe3; Ph&#xf2;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="T&#xea;n Kh&#xe1;ch H&#xe0;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="S&#x1ed1; Ng&#x1b0;&#x1edd;i" type="java.lang.Object"/>
+                    <Column editable="false" title="Gi&#xe1; Ph&#xf2;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="Ng&#xe0;y Nh&#x1ead;n Ph&#xf2;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="Ng&#xe0;y Tr&#x1ea3; Ph&#xf2;ng" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -434,6 +434,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_QLDatPhongMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -469,7 +472,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_DatPhongActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_Thoat1">
+    <Component class="javax.swing.JButton" name="btn_HuyDP">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/Delete.png"/>
@@ -477,7 +480,7 @@
         <Property name="text" type="java.lang.String" value="H&#x1ee7;y DP"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Thoat1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_HuyDPActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

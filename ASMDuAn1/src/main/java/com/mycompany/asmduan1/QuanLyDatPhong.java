@@ -7,7 +7,10 @@ package com.mycompany.asmduan1;
 import com.QLKhachSan.dao.QLDatPhong;
 import com.QLKhachSan.entity.DatPhong;
 import com.QLKhachSan.entity.Phong;
+import com.QLKhachSan.dao.QLPhong;
 import com.QLKhachSan.utils.XJdbc;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,11 +20,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class QuanLyDatPhong extends javax.swing.JFrame {
+
     private QLDatPhong qldp = new QLDatPhong();
     private DatPhong dp = new DatPhong();
     private XJdbc xJdbc = new XJdbc();
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private ArrayList<DatPhong> arrDP = new ArrayList<>();
+    private ArrayList<Phong> arrP = new ArrayList<>();
     private QuanLiPhong qlp = new QuanLiPhong();
 
     /**
@@ -30,6 +35,21 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
     public QuanLyDatPhong() {
         initComponents();
         fillTableQLDatPhong();
+        fillTableQLPhong();
+    }
+
+    public void fillTableQLPhong() {
+        arrP = QLPhong.getAllPhong();
+//    System.out.println("Dữ liệu nhận được từ getAllPhong:");
+//    for (Phong phong : arrP) {
+//        System.out.println(phong.toString()); // Đảm bảo phương thức toString() được định nghĩa trong lớp Phong
+//    }
+
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tbl_QLPhong.getModel();
+        defaultTableModel.setRowCount(0);
+        for (Phong phong : arrP) {
+            defaultTableModel.addRow(phong.toObjectQLP());
+        }
     }
 
     /**
@@ -50,7 +70,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txt_MaPhong = new javax.swing.JTextField();
-        txt_MaKH = new javax.swing.JTextField();
+        txt_TenKH = new javax.swing.JTextField();
         txt_SoNguoi = new javax.swing.JTextField();
         txt_Gia = new javax.swing.JTextField();
         txt_NgayDen = new javax.swing.JTextField();
@@ -59,14 +79,14 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
         txt_MaDatPhong = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_QLDatPhong = new javax.swing.JTable();
+        tbl_QLPhong = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_LoaiPhong = new javax.swing.JTable();
+        tbl_QLDatPhong = new javax.swing.JTable();
         btn_Thoat = new javax.swing.JButton();
         btn_LamMoi = new javax.swing.JButton();
         btn_DatPhong = new javax.swing.JButton();
-        btn_Thoat1 = new javax.swing.JButton();
+        btn_HuyDP = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +139,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                     .addComponent(txt_Gia)
                     .addComponent(txt_SoNguoi)
                     .addComponent(txt_MaPhong)
-                    .addComponent(txt_MaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addComponent(txt_TenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(txt_MaDatPhong, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -143,7 +163,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txt_MaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_TenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -166,7 +186,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Các Loại Phòng"));
         jPanel2.setToolTipText("");
 
-        tbl_QLDatPhong.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_QLPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -174,7 +194,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã Phòng", "Số Phòng", "Loại Phòng", "Giá Phòng", "Trạng Thái"
+                "Mã Phòng", "Số Phòng", "Giá Phòng", "Loại Phòng", "Trạng Thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -185,12 +205,12 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_QLDatPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_QLPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_QLDatPhongMouseClicked(evt);
+                tbl_QLPhongMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbl_QLDatPhong);
+        jScrollPane1.setViewportView(tbl_QLPhong);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -210,7 +230,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Các Loại Phòng"));
 
-        tbl_LoaiPhong.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_QLDatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -218,10 +238,23 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Đặt Phòng", "Mã Phòng", "Tên Khách Hàng", "Sô Người", "Giá Phòng", "Ngày Nhận Phòng", "Ngày Trả Phòng"
+                "Mã Đặt Phòng", "Mã Phòng", "Tên Khách Hàng", "Số Người", "Giá Phòng", "Ngày Nhận Phòng", "Ngày Trả Phòng"
             }
-        ));
-        jScrollPane2.setViewportView(tbl_LoaiPhong);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_QLDatPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_QLDatPhongMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbl_QLDatPhong);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -263,11 +296,11 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
             }
         });
 
-        btn_Thoat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
-        btn_Thoat1.setText("Hủy DP");
-        btn_Thoat1.addActionListener(new java.awt.event.ActionListener() {
+        btn_HuyDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
+        btn_HuyDP.setText("Hủy DP");
+        btn_HuyDP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Thoat1ActionPerformed(evt);
+                btn_HuyDPActionPerformed(evt);
             }
         });
 
@@ -287,7 +320,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                                 .addComponent(btn_Thoat))
                             .addComponent(btn_DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btn_Thoat1)
+                        .addComponent(btn_HuyDP)
                         .addGap(26, 26, 26)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -307,7 +340,7 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_Thoat)
                             .addComponent(btn_LamMoi)
-                            .addComponent(btn_Thoat1))
+                            .addComponent(btn_HuyDP))
                         .addGap(95, 95, 95))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,23 +363,34 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
         themDatPhong();
     }//GEN-LAST:event_btn_DatPhongActionPerformed
 
+    private void tbl_QLPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_QLPhongMouseClicked
+        int index = tbl_QLPhong.getSelectedRow();
+        if (index >= 0 && index < arrP.size()) {
+            Phong selectedPhong = arrP.get(index);
+            fillFromTableQLPhong(selectedPhong);
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn phòng nào.");
+        };
+    }//GEN-LAST:event_tbl_QLPhongMouseClicked
+
+    private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
+        lamMoiFromQLDatPhong();
+    }//GEN-LAST:event_btn_LamMoiActionPerformed
+
+    private void btn_HuyDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HuyDPActionPerformed
+        String maDP = txt_MaDatPhong.getText();
+        huyDatPhong(maDP);
+    }//GEN-LAST:event_btn_HuyDPActionPerformed
+
     private void tbl_QLDatPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_QLDatPhongMouseClicked
         int index = tbl_QLDatPhong.getSelectedRow();
         if (index >= 0 && index < arrDP.size()) {
             DatPhong selectedDatPhong = arrDP.get(index);
             fillFromTableQLDatPhong(selectedDatPhong);
         } else {
-            JOptionPane.showMessageDialog(this, "Chưa chọn phòng nào.");    
+            JOptionPane.showMessageDialog(this, "Chưa chọn phòng nào.");
         };
     }//GEN-LAST:event_tbl_QLDatPhongMouseClicked
-
-    private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_LamMoiActionPerformed
-
-    private void btn_Thoat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Thoat1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_Thoat1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -385,9 +429,9 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_DatPhong;
+    private javax.swing.JButton btn_HuyDP;
     private javax.swing.JButton btn_LamMoi;
     private javax.swing.JButton btn_Thoat;
-    private javax.swing.JButton btn_Thoat1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -401,57 +445,66 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tbl_LoaiPhong;
     private javax.swing.JTable tbl_QLDatPhong;
+    private javax.swing.JTable tbl_QLPhong;
     private javax.swing.JTextField txt_Gia;
     private javax.swing.JTextField txt_MaDatPhong;
-    private javax.swing.JTextField txt_MaKH;
     private javax.swing.JTextField txt_MaPhong;
     private javax.swing.JTextField txt_NgayDen;
     private javax.swing.JTextField txt_NgayDi;
     private javax.swing.JTextField txt_SoNguoi;
+    private javax.swing.JTextField txt_TenKH;
     // End of variables declaration//GEN-END:variables
     public void fillTableQLDatPhong() {
-        arrDP= qldp.getAllDatPhong();
+        arrDP = qldp.getAllDatPhong();
         defaultTableModel = (DefaultTableModel) tbl_QLDatPhong.getModel();
         defaultTableModel.setRowCount(0);
         for (DatPhong list : arrDP) {
             defaultTableModel.addRow(list.toObjectQLDP());
         }
     }
-        public void lamMoiFromQLDatPhong() {
+
+    public void lamMoiFromQLDatPhong() {
         txt_MaDatPhong.setText("");
         txt_MaPhong.setText("");
-        txt_MaKH.setText("");
+        txt_TenKH.setText("");
         txt_SoNguoi.setText("");
         txt_Gia.setText("");
         txt_NgayDen.setText("");
         txt_NgayDi.setText("");
-        
+
     }
+
     public DatPhong readFromQLDatPhong() {
         String maDatPhong = txt_MaDatPhong.getText();
         String maPhong = txt_MaPhong.getText();
-        String maKH = txt_MaKH.getText();
+        String maKH = txt_TenKH.getText();
         int soNguoi = Integer.parseInt(txt_SoNguoi.getText());
         float giaPhong = Float.parseFloat(txt_Gia.getText());
         String ngayNP = txt_NgayDen.getText();
         String ngayTP = txt_NgayDi.getText();
         return new DatPhong(maDatPhong, maPhong, maKH, soNguoi, giaPhong, ngayNP, ngayTP);
     }
+
     public void fillFromTableQLDatPhong(DatPhong datPhong) {
         txt_MaDatPhong.setText(datPhong.getMaDP());
         txt_MaPhong.setText(datPhong.getMaPhong());
-        txt_MaKH.setText(datPhong.getMaKH());
+        txt_TenKH.setText(datPhong.getTenKH());
         txt_SoNguoi.setText(String.valueOf(datPhong.getSoNguoi()));
         txt_Gia.setText(String.valueOf(datPhong.getGiaPhong()));
         txt_NgayDen.setText(datPhong.getNgayNP());
         txt_NgayDi.setText(datPhong.getNgayTP());
     }
+
+    public void fillFromTableQLPhong(Phong phong) {
+        txt_MaPhong.setText(phong.getMaPhong());
+        txt_Gia.setText(String.valueOf(phong.getGiaPhong()));
+    }
+
     private boolean validateForm() {
-        if (txt_MaPhong.getText().isEmpty() || txt_MaKH.getText().isEmpty() || 
-            txt_SoNguoi.getText().isEmpty() || txt_Gia.getText().isEmpty() || 
-            txt_NgayDen.getText().isEmpty() || txt_NgayDi.getText().isEmpty()) {
+        if (txt_MaPhong.getText().isEmpty() || txt_TenKH.getText().isEmpty()
+                || txt_SoNguoi.getText().isEmpty() || txt_Gia.getText().isEmpty()
+                || txt_NgayDen.getText().isEmpty() || txt_NgayDi.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin.");
             return false;
         }
@@ -464,20 +517,60 @@ public class QuanLyDatPhong extends javax.swing.JFrame {
         }
         return true;
     }
-         private void themDatPhong() {
+
+    public boolean checkDate(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
         try {
-            if (validateForm()) {
+            sdf.parse(dateStr);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+ 
+    private void themDatPhong() {
+    try {
+        if (validateForm() && checkDate(txt_NgayDen.getText()) && checkDate(txt_NgayDi.getText())) {
+            DatPhong datPhong = readFromQLDatPhong();
+            qldp.addDatPhong(datPhong);
+
+            // Update the status of the room to "Đang sử dụng"
+            String maPhong = datPhong.getMaPhong();
+            QLPhong qlPhong = new QLPhong();
+            qlPhong.updateRoomStatus(maPhong, "Đang sử dụng");
+
+            JOptionPane.showMessageDialog(this, "Đặt phòng thành công!");
+            fillTableQLDatPhong();
+            lamMoiFromQLDatPhong();
+            fillTableQLPhong();
+        } else {
+            JOptionPane.showMessageDialog(this, "Đặt phòng thất bại. Vui lòng thử lại.");
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Lỗi khi thêm dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+    public void huyDatPhong(String maDatPhong) {
+        try {
+            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn hủy đặt phòng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
                 DatPhong datPhong = readFromQLDatPhong();
-                qldp.addDatPhong(datPhong);
-                JOptionPane.showMessageDialog(this, "Đặt phòng thành công!");
+                qldp.DeleteDatPhong(maDatPhong);
+                
+            String maPhong = datPhong.getMaPhong();
+            QLPhong qlPhong = new QLPhong();
+            qlPhong.updateRoomStatus(maPhong, "Trống");
+                JOptionPane.showMessageDialog(this, "hủy đặt phòng thành công");
                 fillTableQLDatPhong();
                 lamMoiFromQLDatPhong();
+                fillTableQLPhong();
             } else {
-                JOptionPane.showMessageDialog(this, "Đặt phòng thất bại. Vui lòng thử lại.");
+                JOptionPane.showMessageDialog(this, "hủy đặt phòng thất bại ");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm dữ liệu: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
-

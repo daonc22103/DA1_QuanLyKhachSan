@@ -11,7 +11,7 @@ package com.QLKhachSan.entity;
 public class DatPhong {
     private String maDP;
     private String maPhong;
-    private String maKH;
+    private String tenKH;
     private int soNguoi;
     private double giaPhong;
     private String ngayNP;
@@ -20,10 +20,10 @@ public class DatPhong {
     public DatPhong() {
     }
 
-    public DatPhong(String maDP, String maPhong, String maKH, int soNguoi, double giaPhong, String ngayNP, String ngayTP) {
+    public DatPhong(String maDP, String maPhong, String tenKH, int soNguoi, double giaPhong, String ngayNP, String ngayTP) {
         this.maDP = maDP;
         this.maPhong = maPhong;
-        this.maKH = maKH;
+        this.tenKH = tenKH;
         this.soNguoi = soNguoi;
         this.giaPhong = giaPhong;
         this.ngayNP = ngayNP;
@@ -46,12 +46,12 @@ public class DatPhong {
         this.maPhong = maPhong;
     }
     
-    public String getMaKH() {
-        return maKH;
+    public String getTenKH() {
+        return tenKH;
     }
 
-    public void setMaKH(String maKH) {
-        this.maKH = maKH;
+    public void setTenKH(String tenKH) {
+        this.tenKH = tenKH;
     }
 
     public int getSoNguoi() {
@@ -88,7 +88,7 @@ public class DatPhong {
 
         public Object[] toObjectQLDP(){
         return new Object[] {
-        maDP, maPhong, maKH, soNguoi, giaPhong, ngayNP, ngayTP     
+        maDP, maPhong, tenKH, soNguoi, giaPhong, ngayNP, ngayTP     
         };
     }
     
