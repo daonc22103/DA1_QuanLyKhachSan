@@ -44,7 +44,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         //dùng để kết nối JDBC của SQL `
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String username = "sa";
-        String password = "123";
+        String password = "123456";
         //địa chỉ IP máy chủ
         String host = "localhost";
         //tên của DATABASE cần kết nối
@@ -349,7 +349,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Chức vụ");
 
-        cbo_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản Lý", "Lễ Tân", "Trưởng Phòng", "Lao công", "Bảo vệ" }));
+        cbo_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản Lý", "Lễ Tân", "Nhân Viên" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
