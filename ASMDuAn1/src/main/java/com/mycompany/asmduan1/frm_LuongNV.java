@@ -68,6 +68,7 @@ public class frm_LuongNV extends javax.swing.JFrame {
         stm = con.createStatement();
     }
 
+    
     public void loadTable() throws SQLException {
         // Câu truy vấn SQL
         String SQL = "SELECT * FROM NHANVIEN"; // Đảm bảo tên bảng là NHANVIEN
