@@ -44,7 +44,7 @@ public class frm_QuanLyNhanVien extends javax.swing.JFrame {
         //dùng để kết nối JDBC của SQL `
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String username = "sa";
-        String password = "123456";
+        String password = "123";
         //địa chỉ IP máy chủ
         String host = "localhost";
         //tên của DATABASE cần kết nối
