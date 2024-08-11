@@ -10,6 +10,7 @@ import com.QLKhachSan.utils.XJdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
  * @author ASUS
  */
 public class QLDatPhong {
+
     public static ArrayList<DatPhong> getAllDatPhong() {
         ArrayList<DatPhong> datphongArr = new ArrayList<DatPhong>();
         try {
@@ -31,7 +33,7 @@ public class QLDatPhong {
                 DatPhong datPhong = new DatPhong();
                 datPhong.setmaDP(res.getString("maDP"));
                 datPhong.setMaPhong(res.getString("maPhong"));
-                datPhong.setTenKH(res.getString("tenKH"));
+                datPhong.setMaKH(res.getString("maKH"));
                 datPhong.setSoNguoi(res.getInt("soNguoi"));
                 datPhong.setGiaPhong(res.getFloat("giaPhong"));
                 datPhong.setNgayNP(res.getString("ngayNP"));
@@ -44,15 +46,16 @@ public class QLDatPhong {
         }
         return datphongArr;
     }
+
     public static int addDatPhong(DatPhong datPhong) {
-        String sql = "INSERT INTO DATPHONG(MaDP, MaPhong, TenKH, SoNguoi, GiaPhong, NgayNP, NgayTP) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO DATPHONG(MaDP, MaPhong, maKH, SoNguoi, GiaPhong, NgayNP, NgayTP) VALUES(?,?,?,?,?,?,?)";
         try {
             Connection connection = XJdbc.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, datPhong.getMaDP());
             preparedStatement.setString(2, datPhong.getMaPhong());
-            preparedStatement.setString(3, datPhong.getTenKH());
-            preparedStatement.setInt(4,datPhong.getSoNguoi());
+            preparedStatement.setString(3, datPhong.getMaKH());
+            preparedStatement.setInt(4, datPhong.getSoNguoi());
             preparedStatement.setDouble(5, datPhong.getGiaPhong());
             preparedStatement.setString(6, datPhong.getNgayNP());
             preparedStatement.setString(7, datPhong.getNgayTP());
@@ -63,7 +66,8 @@ public class QLDatPhong {
             return 0;
         }
     }
-        public static int DeleteDatPhong(String a) {
+
+    public static int DeleteDatPhong(String a) {
         String sql = "DELETE FROM DATPHONG WHERE MaDP = ?";
         try {
             Connection connection = XJdbc.getConnection();
@@ -75,5 +79,30 @@ public class QLDatPhong {
             System.out.println(e);
             return 0;
         }
+    }
+
+    public DatPhong findByMaDP(String maDP) {
+        DatPhong datPhong = null;
+        String sql = "SELECT * FROM DATPHONG WHERE MaDP = ?";
+
+        try (Connection connection = XJdbc.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, maDP);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String maPhong = resultSet.getString("MaPhong");
+                String maKH = resultSet.getString("MaKH");
+                int soNguoi = resultSet.getInt("SoNguoi");
+                double giaPhong = resultSet.getDouble("GiaPhong");
+                String ngayNP = resultSet.getString("NgayNP");
+                String ngayTP = resultSet.getString("NgayTP");
+
+                datPhong = new DatPhong(maDP, maPhong, maKH, soNguoi, giaPhong, ngayNP, ngayTP);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return datPhong;
     }
 }

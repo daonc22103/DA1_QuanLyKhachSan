@@ -11,12 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author ASUS
  */
 public class QLPhong {
+
     public static ArrayList<Phong> getAllPhong() {
         ArrayList<Phong> phongArr = new ArrayList<>();
         try {
@@ -41,6 +43,7 @@ public class QLPhong {
         }
         return phongArr;
     }
+
     public static int addPhong(Phong phong) {
         String sql = "INSERT INTO PHONG(MaPhong, SoPhong, GiaPhong, LoaiPhong, TrangThaiP) VALUES(?,?,?,?,?)";
         try {
@@ -49,7 +52,7 @@ public class QLPhong {
             preparedStatement.setString(1, phong.getMaPhong());
             preparedStatement.setInt(2, phong.getSoPhong());
             preparedStatement.setDouble(3, phong.getGiaPhong());
-            preparedStatement.setString(4,phong.getLoaiPhong());
+            preparedStatement.setString(4, phong.getLoaiPhong());
             preparedStatement.setString(5, phong.getTrangThaiP());
             int i = preparedStatement.executeUpdate();
             return i;
@@ -58,24 +61,11 @@ public class QLPhong {
             return 0;
         }
     }
-    public static int DeletePhong(Phong phong) {
-        String sql = "DELETE FROM PHONG WHERE MaPhong = ?";
-        try {
-            Connection connection = XJdbc.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, phong.getMaPhong());
-            int i = preparedStatement.executeUpdate();
-            return i;
-        } catch (Exception e) {
-            System.out.println(e);
-            return 0;
-        }
-    }
+
     public static int updatePhong(Phong phong) {
         String sql = "UPDATE PHONG SET SoPhong = ?, GiaPhong = ?, LoaiPhong = ?,TrangThaiP = ? WHERE MaPhong = ?";
         try (
-            Connection conn = XJdbc.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                Connection conn = XJdbc.getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, phong.getSoPhong());
             preparedStatement.setDouble(2, phong.getGiaPhong());
             preparedStatement.setString(3, phong.getLoaiPhong());
@@ -89,28 +79,8 @@ public class QLPhong {
             return 0;
         }
     }
-    public Phong getPhongByMaPhong(String maPhong) {
-                // Giả sử bạn có một phương thức tìm khách hàng trong cơ sở dữ liệu
-                // Ví dụ:
-                String sql = "SELECT * FROM PHONG WHERE MaPhong = ?";
-                try {
-                    ResultSet rs = XJdbc.executeQuery(sql, maPhong);
-                    if (rs.next()) {
-                        Phong phong = new Phong();
-                        phong.setMaPhong(rs.getString("maPhong"));
-                        phong.setLoaiPhong(rs.getString("loaiPhong"));
-                        phong.setGiaPhong(rs.getDouble("giaPhong"));
-                        phong.setLoaiPhong(rs.getString("loaiPhong"));
-                        phong.setTrangThaiP(rs.getString("trangThaiP"));
-                        return phong;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        public void updateRoomStatus(String maPhong, String status) {
-        // Implement the logic to update the room status in the database
+
+    public void updateRoomStatus(String maPhong, String status) {
         String sql = "UPDATE PHONG SET TrangThaiP = ? WHERE MaPhong = ?";
         try (Connection conn = XJdbc.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, status);
@@ -120,6 +90,23 @@ public class QLPhong {
             e.printStackTrace();
             throw new RuntimeException("Lỗi khi cập nhật trạng thái phòng: " + e.getMessage());
         }
+    }
+
+    public String getRoomStatus(String maPhong) {
+        String status = null;
+        String sql = "SELECT TrangThaiP FROM PHONG WHERE MaPhong = ?";
+        try (Connection conn = XJdbc.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, maPhong);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    status = rs.getString("TrangThaiP");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Lỗi khi lấy trạng thái phòng: " + e.getMessage());
+        }
+        return status;
     }
 
 }

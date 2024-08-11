@@ -65,17 +65,17 @@ public class QuanLiThongKe extends javax.swing.JFrame {
 
         tbl_TKDatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "THÁNG", "NĂM ", "TỔNG SỐ ĐẶT PHÒNG", "TỔNG DOANH THU"
+                "THÁNG", "NĂM ", "TỔNG SỐ ĐẶT PHÒNG"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -119,7 +119,15 @@ public class QuanLiThongKe extends javax.swing.JFrame {
             new String [] {
                 "CHỨC VỤ", "SỐ LƯỢNG"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tbl_QLTKNhanVien);
 
         jTabbedPane1.addTab("NHÂN  VIÊN", jScrollPane3);
@@ -207,8 +215,8 @@ public class QuanLiThongKe extends javax.swing.JFrame {
     private javax.swing.JTable tbl_TKKhachHang;
     // End of variables declaration//GEN-END:variables
      public void fillTableQLTKDatPhong() {
-        String sql = "SELECT Thang, Nam, TongSoDatPhong, TongDoanhThu FROM VIEW_THONGKE_DATPHONG";
-        String[] columnNames = {"Tháng", "Năm", "Tổng Số Đặt Phòng", "Tổng Doanh Thu"};
+        String sql = "SELECT Thang, Nam, TongSoDatPhong FROM VIEW_THONGKE_DATPHONG";
+        String[] columnNames = {"Tháng", "Năm", "Tổng Số Đặt Phòng"};
 
         // Khởi tạo DefaultTableModel với các tiêu đề cột
         DefaultTableModel defaultTableModel = new DefaultTableModel(columnNames, 0);
@@ -221,10 +229,9 @@ public class QuanLiThongKe extends javax.swing.JFrame {
                 int thang = rs.getInt("Thang");
                 int nam = rs.getInt("Nam");
                 int tongSoDatPhong = rs.getInt("TongSoDatPhong");
-                BigDecimal tongDoanhThu = rs.getBigDecimal("TongDoanhThu");
 
                 // Thêm dòng vào DefaultTableModel
-                Object[] rowData = {thang, nam, tongSoDatPhong, tongDoanhThu != null ? tongDoanhThu.toString() : "0"};
+                Object[] rowData = {thang, nam, tongSoDatPhong};
                 defaultTableModel.addRow(rowData);
             }
 

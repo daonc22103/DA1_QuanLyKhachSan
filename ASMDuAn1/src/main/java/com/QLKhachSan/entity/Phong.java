@@ -9,6 +9,7 @@ package com.QLKhachSan.entity;
  * @author ASUS
  */
 public class Phong {
+
     private String maPhong;
     private int soPhong;
     private double giaPhong;
@@ -65,11 +66,11 @@ public class Phong {
     public void setTrangThaiP(String trangThaiP) {
         this.trangThaiP = trangThaiP;
     }
-    
-    
+
     public Object[] toObjectQLP() {
         return new Object[]{
-            maPhong, soPhong,giaPhong, loaiPhong, trangThaiP
+            maPhong, soPhong, giaPhong, loaiPhong, trangThaiP
         };
     }
+
 }

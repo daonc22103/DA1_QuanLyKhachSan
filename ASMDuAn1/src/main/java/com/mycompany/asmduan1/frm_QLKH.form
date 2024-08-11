@@ -41,7 +41,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txt_TimKiem" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btn_Tim" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_TimKhachHang" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_Them" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_TimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_Tim" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_TimKhachHang" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_Them" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_Sua" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_Xoa" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -419,12 +419,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btn_Tim">
+    <Component class="javax.swing.JButton" name="btn_TimKhachHang">
       <Properties>
         <Property name="text" type="java.lang.String" value="T&#xec;m"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_TimActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_TimKhachHangActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">

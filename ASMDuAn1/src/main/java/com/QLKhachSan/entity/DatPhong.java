@@ -4,14 +4,18 @@
  */
 package com.QLKhachSan.entity;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 /**
  *
  * @author ASUS
  */
 public class DatPhong {
+
     private String maDP;
     private String maPhong;
-    private String tenKH;
+    private String maKH;
     private int soNguoi;
     private double giaPhong;
     private String ngayNP;
@@ -20,10 +24,10 @@ public class DatPhong {
     public DatPhong() {
     }
 
-    public DatPhong(String maDP, String maPhong, String tenKH, int soNguoi, double giaPhong, String ngayNP, String ngayTP) {
+    public DatPhong(String maDP, String maPhong, String maKH, int soNguoi, double giaPhong, String ngayNP, String ngayTP) {
         this.maDP = maDP;
         this.maPhong = maPhong;
-        this.tenKH = tenKH;
+        this.maKH = maKH;
         this.soNguoi = soNguoi;
         this.giaPhong = giaPhong;
         this.ngayNP = ngayNP;
@@ -37,7 +41,7 @@ public class DatPhong {
     public void setmaDP(String maDP) {
         this.maDP = maDP;
     }
-    
+
     public String getMaPhong() {
         return maPhong;
     }
@@ -45,13 +49,13 @@ public class DatPhong {
     public void setMaPhong(String maPhong) {
         this.maPhong = maPhong;
     }
-    
-    public String getTenKH() {
-        return tenKH;
+
+    public String getMaKH() {
+        return maKH;
     }
 
-    public void setTenKH(String tenKH) {
-        this.tenKH = tenKH;
+    public void setMaKH(String maKH) {
+        this.maKH = maKH;
     }
 
     public int getSoNguoi() {
@@ -86,11 +90,27 @@ public class DatPhong {
         this.ngayTP = ngayTP;
     }
 
-        public Object[] toObjectQLDP(){
-        return new Object[] {
-        maDP, maPhong, tenKH, soNguoi, giaPhong, ngayNP, ngayTP     
+    public Object[] toObjectQLDP() {
+        return new Object[]{
+            maDP, maPhong, maKH, soNguoi, giaPhong, ngayNP, ngayTP
         };
     }
-    
+
+    public long soNgayO() {
+        // Chuyển đổi ngày từ String sang LocalDate
+        LocalDate ngayNhanPhong = LocalDate.parse(ngayNP);
+        LocalDate ngayTraPhong = LocalDate.parse(ngayTP);
+
+        // Tính số ngày giữa hai ngày
+        return ChronoUnit.DAYS.between(ngayNhanPhong, ngayTraPhong);
+    }
+
+    public double tinhTongTien() {
+        // Sử dụng phương thức soNgayO() để tính số ngày ở
+        long soNgay = soNgayO();
+        
+        // Tính tổng tiền
+        return soNgay * giaPhong;
+    }
     
 }

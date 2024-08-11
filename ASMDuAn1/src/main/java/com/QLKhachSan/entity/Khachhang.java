@@ -103,4 +103,9 @@ public class Khachhang {
         maKH, tenKH, gioiTinh == 1 ? "Nam" : "Nữ", ngaySinh, CCCD, diaChi, SDT, Email      
         };
     }
+    public Object[] toObjectQLTT(){
+        return new Object[]{
+            maKH, tenKH, ngaySinh, CCCD, SDT
+        };
+    }
 }

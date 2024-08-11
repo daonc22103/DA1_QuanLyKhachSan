@@ -4,22 +4,28 @@
  */
 package com.mycompany.asmduan1;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
  * @author AD
  */
 public class frm_ql extends javax.swing.JFrame {
-
+    private Timer timer;
     /**
      * Creates new form frm_form
      */
     public frm_ql() {
         initComponents();
+        startClock();
     }
 
     
@@ -37,29 +43,29 @@ public class frm_ql extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btn_KetThuc = new javax.swing.JButton();
-        bnt_LienHe = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lbl_DongHo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        btn_DangXuat1 = new javax.swing.JButton();
+        btn_DangXuat2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         aa = new javax.swing.JMenu();
         mnui_DangXuat = new javax.swing.JMenuItem();
         mnui_Thoat = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        mnui_QLPhong = new javax.swing.JMenuItem();
-        mnu_QLDP = new javax.swing.JMenuItem();
         mnu_ThongKe = new javax.swing.JMenuItem();
         mnu_QuanLyNhanVien = new javax.swing.JMenuItem();
         mnu_QuanLyThongKH = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnu_DoanhThu = new javax.swing.JMenuItem();
+        mnu_DoanhThu1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btn_DangXuat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_DangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
-        btn_DangXuat.setText("Đăng xuất");
+        btn_DangXuat.setText("ĐĂNG XUẤT");
         btn_DangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_DangXuatActionPerformed(evt);
@@ -87,19 +93,10 @@ public class frm_ql extends javax.swing.JFrame {
 
         btn_KetThuc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_KetThuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Stop.png"))); // NOI18N
-        btn_KetThuc.setText("Kết thúc");
+        btn_KetThuc.setText("KẾT THÚC");
         btn_KetThuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_KetThucActionPerformed(evt);
-            }
-        });
-
-        bnt_LienHe.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        bnt_LienHe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Call.png"))); // NOI18N
-        bnt_LienHe.setText("Liên hệ");
-        bnt_LienHe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnt_LienHeActionPerformed(evt);
             }
         });
 
@@ -110,6 +107,22 @@ public class frm_ql extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/5-stars (1).png"))); // NOI18N
         jLabel4.setText("jLabel4");
+
+        btn_DangXuat1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_DangXuat1.setText("LƯƠNG ");
+        btn_DangXuat1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DangXuat1ActionPerformed(evt);
+            }
+        });
+
+        btn_DangXuat2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_DangXuat2.setText("THỐNG KÊ");
+        btn_DangXuat2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DangXuat2ActionPerformed(evt);
+            }
+        });
 
         aa.setText("Hệ thống");
 
@@ -134,24 +147,6 @@ public class frm_ql extends javax.swing.JFrame {
         jMenuBar1.add(aa);
 
         jMenu2.setText("Quản lý");
-
-        mnui_QLPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Home.png"))); // NOI18N
-        mnui_QLPhong.setText("Quản lý phòng ");
-        mnui_QLPhong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnui_QLPhongActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnui_QLPhong);
-
-        mnu_QLDP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Calendar.png"))); // NOI18N
-        mnu_QLDP.setText("Quản lý đặt phòng");
-        mnu_QLDP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnu_QLDPActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnu_QLDP);
 
         mnu_ThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/List.png"))); // NOI18N
         mnu_ThongKe.setText("Quản lý thống kê");
@@ -193,6 +188,15 @@ public class frm_ql extends javax.swing.JFrame {
         });
         jMenu3.add(mnu_DoanhThu);
 
+        mnu_DoanhThu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Numbered list.png"))); // NOI18N
+        mnu_DoanhThu1.setText("Tổng hợp thống kê");
+        mnu_DoanhThu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_DoanhThu1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnu_DoanhThu1);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Liên hệ");
@@ -209,18 +213,20 @@ public class frm_ql extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_DongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addComponent(lbl_DongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(350, 350, 350)
-                .addComponent(bnt_LienHe)
-                .addGap(50, 50, 50)
+                .addGap(150, 150, 150)
+                .addComponent(btn_DangXuat1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_DangXuat2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_KetThuc)
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
                 .addComponent(btn_DangXuat)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,9 +237,10 @@ public class frm_ql extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_KetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bnt_LienHe, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_DangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(btn_DangXuat1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_DangXuat2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -248,12 +255,6 @@ public class frm_ql extends javax.swing.JFrame {
         hide();
         // TODO add your handling code here:
     }//GEN-LAST:event_mnui_ThoatActionPerformed
-
-    private void mnu_QLDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_QLDPActionPerformed
-        QuanLyDatPhong qldp = new QuanLyDatPhong();
-        qldp.show();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnu_QLDPActionPerformed
 
     private void btn_DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangXuatActionPerformed
         frm_DangNhap ql = new frm_DangNhap();
@@ -274,16 +275,6 @@ public class frm_ql extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_KetThucActionPerformed
 
-    private void mnui_QLPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnui_QLPhongActionPerformed
-        QuanLiPhong qlp = new QuanLiPhong();
-        qlp.show();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnui_QLPhongActionPerformed
-
-    private void bnt_LienHeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_LienHeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bnt_LienHeActionPerformed
-
     private void mnu_QuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_QuanLyNhanVienActionPerformed
         frm_QuanLyNhanVien qlnv = null;
         qlnv = new frm_QuanLyNhanVien(); // Xử lý ngoại lệ ClassNotFoundException
@@ -295,6 +286,7 @@ public class frm_ql extends javax.swing.JFrame {
     private void mnu_ThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_ThongKeActionPerformed
         QuanLiThongKe qltk = new QuanLiThongKe();
         qltk.show();
+        hide();
         // TODO add your handling code here:
     }//GEN-LAST:event_mnu_ThongKeActionPerformed
 
@@ -307,8 +299,23 @@ public class frm_ql extends javax.swing.JFrame {
     private void mnu_DoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_DoanhThuActionPerformed
     frm_LuongNV luong = new frm_LuongNV();
     luong.show();
+        hide();
 // TODO add your handling code here:
     }//GEN-LAST:event_mnu_DoanhThuActionPerformed
+
+    private void mnu_DoanhThu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_DoanhThu1ActionPerformed
+        QuanLiThongKe qltk = new QuanLiThongKe();
+        qltk.show();
+        hide();
+    }//GEN-LAST:event_mnu_DoanhThu1ActionPerformed
+
+    private void btn_DangXuat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangXuat1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_DangXuat1ActionPerformed
+
+    private void btn_DangXuat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangXuat2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_DangXuat2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,8 +357,9 @@ public class frm_ql extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu aa;
-    private javax.swing.JButton bnt_LienHe;
     private javax.swing.JButton btn_DangXuat;
+    private javax.swing.JButton btn_DangXuat1;
+    private javax.swing.JButton btn_DangXuat2;
     private javax.swing.JButton btn_KetThuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -363,12 +371,29 @@ public class frm_ql extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_DongHo;
     private javax.swing.JMenuItem mnu_DoanhThu;
-    private javax.swing.JMenuItem mnu_QLDP;
+    private javax.swing.JMenuItem mnu_DoanhThu1;
     private javax.swing.JMenuItem mnu_QuanLyNhanVien;
     private javax.swing.JMenuItem mnu_QuanLyThongKH;
     private javax.swing.JMenuItem mnu_ThongKe;
     private javax.swing.JMenuItem mnui_DangXuat;
-    private javax.swing.JMenuItem mnui_QLPhong;
     private javax.swing.JMenuItem mnui_Thoat;
     // End of variables declaration//GEN-END:variables
+    private void startClock() {
+        // Create a timer that fires every second
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateClock();
+            }
+        });
+        // Start the timer
+        timer.start();
+    }
+    private void updateClock() {
+        // Get the current time and format it
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String time = sdf.format(new Date());
+        // Set the formatted time to lbl_DongHo
+        lbl_DongHo.setText(time);
+    }
 }
